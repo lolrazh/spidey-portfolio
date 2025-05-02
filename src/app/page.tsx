@@ -110,9 +110,9 @@ export default function NakulPortfolio() {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12">
           {/* Left column - Profile & Info */}
           <div className="md:col-span-3 flex flex-col">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-medium font-cormorant tracking-wider mb-8 uppercase">NITHIN/<br />SPIDEY</h1>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-medium font-cormorant tracking-tight mb-4 uppercase">NITHIN/<br />SPIDEY</h1>
 
-            <p className="text-sm mb-4 mt-2">
+            <p className="text-sm mb-6 mt-2">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae eros quis magna varius condimentum. 
               Integer ac magna eget velit sagittis commodo eget vel nisi.
             </p>
@@ -145,11 +145,11 @@ export default function NakulPortfolio() {
           {/* Profile Image */}
           <div className="md:col-span-9 relative h-[600px] md:h-[700px] cursor-pointer">
             <Image
-              src="https://img.freepik.com/free-photo/portrait-young-man-studio_23-2150773420.jpg"
-              alt="Alejandro portrait"
+              src="/PSP06449.jpg"
+              alt="Nithin/Spidey portrait"
               fill
               className="object-cover object-center"
-              onClick={() => openLightbox(["https://img.freepik.com/free-photo/portrait-young-man-studio_23-2150773420.jpg"], 0, 'profile')}
+              onClick={() => openLightbox(["/PSP06449.jpg"], 0, 'profile')}
             />
           </div>
         </div>
@@ -162,32 +162,47 @@ export default function NakulPortfolio() {
       </div>
 
       {/* Image Gallery */}
-      <section className="container mx-auto px-4 md:px-8">
-        <div className="image-gallery">
-          {portfolioImages.map((src, i) => (
-            <div
-              key={`portfolio-${i}-${src.substring(src.lastIndexOf('/') + 1, src.lastIndexOf('.'))}}`}
-              className="relative aspect-[3/4] cursor-pointer group"
-              onClick={() => openLightbox(portfolioImages, i, 'portfolio')}
-            >
-              <Image
-                src={src}
-                alt={`Nakul portfolio image ${i + 1}`}
-                fill
-                className="object-cover object-center transition-all duration-300 group-hover:brightness-90"
-              />
-              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                <div className="bg-black/40 text-white p-2 rounded-full">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-zoom-in">
-                    <circle cx="11" cy="11" r="8" />
-                    <path d="m21 21-4.3-4.3" />
-                    <path d="M11 8v6" />
-                    <path d="M8 11h6" />
-                  </svg>
-                </div>
-              </div>
-            </div>
-          ))}
+      <section className="container mx-auto px-4 md:px-8 py-8">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
+          {/* First row - wide image and square image */}
+          <div className="md:col-span-8 relative aspect-[16/9]">
+            <Image
+              src={portfolioImages[0]}
+              alt="Portfolio image 1"
+              fill
+              className="object-cover"
+              onClick={() => openLightbox([portfolioImages[0]], 0, 'portfolio')}
+            />
+          </div>
+          <div className="md:col-span-4 relative aspect-square">
+            <Image
+              src={portfolioImages[1]}
+              alt="Portfolio image 2"
+              fill
+              className="object-cover"
+              onClick={() => openLightbox([portfolioImages[1]], 0, 'portfolio')}
+            />
+          </div>
+
+          {/* Second row - square image and wide image */}
+          <div className="md:col-span-4 relative aspect-square">
+            <Image
+              src={portfolioImages[2]}
+              alt="Portfolio image 3"
+              fill
+              className="object-cover"
+              onClick={() => openLightbox([portfolioImages[2]], 0, 'portfolio')}
+            />
+          </div>
+          <div className="md:col-span-8 relative aspect-[16/9]">
+            <Image
+              src={portfolioImages[3]}
+              alt="Portfolio image 4"
+              fill
+              className="object-cover"
+              onClick={() => openLightbox([portfolioImages[3]], 0, 'portfolio')}
+            />
+          </div>
         </div>
       </section>
 
@@ -255,31 +270,46 @@ export default function NakulPortfolio() {
 
       {/* Fashion Shows Gallery */}
       <section className="container mx-auto px-4 md:px-8">
-        <div className="image-gallery">
-          {fashionShowImages.map((src, i) => (
-            <div
-              key={`fashion-${i}-${src.substring(src.lastIndexOf('/') + 1, src.lastIndexOf('~'))}`}
-              className="relative aspect-[3/4] cursor-pointer group"
-              onClick={() => openLightbox(fashionShowImages, i, 'fashion')}
-            >
-              <Image
-                src={src}
-                alt={`Nakul fashion show image ${i + 1}`}
-                fill
-                className="object-cover object-center transition-all duration-300 group-hover:brightness-90"
-              />
-              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                <div className="bg-black/40 text-white p-2 rounded-full">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-zoom-in">
-                    <circle cx="11" cy="11" r="8" />
-                    <path d="m21 21-4.3-4.3" />
-                    <path d="M11 8v6" />
-                    <path d="M8 11h6" />
-                  </svg>
-                </div>
-              </div>
-            </div>
-          ))}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
+          {/* First row - wide image and square image */}
+          <div className="md:col-span-8 relative aspect-[16/9]">
+            <Image
+              src={fashionShowImages[0]}
+              alt="Fashion show image 1"
+              fill
+              className="object-cover"
+              onClick={() => openLightbox([fashionShowImages[0]], 0, 'fashion')}
+            />
+          </div>
+          <div className="md:col-span-4 relative aspect-square">
+            <Image
+              src={fashionShowImages[1]}
+              alt="Fashion show image 2"
+              fill
+              className="object-cover"
+              onClick={() => openLightbox([fashionShowImages[1]], 0, 'fashion')}
+            />
+          </div>
+
+          {/* Second row - square image and wide image */}
+          <div className="md:col-span-4 relative aspect-square">
+            <Image
+              src={fashionShowImages[2]}
+              alt="Fashion show image 3"
+              fill
+              className="object-cover"
+              onClick={() => openLightbox([fashionShowImages[2]], 0, 'fashion')}
+            />
+          </div>
+          <div className="md:col-span-8 relative aspect-[16/9]">
+            <Image
+              src={fashionShowImages[3]}
+              alt="Fashion show image 4"
+              fill
+              className="object-cover"
+              onClick={() => openLightbox([fashionShowImages[3]], 0, 'fashion')}
+            />
+          </div>
         </div>
       </section>
 
