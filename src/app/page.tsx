@@ -28,9 +28,11 @@ const allImages = [
   "/PSP06450.jpg",
   "/PSP06444.jpg",
   "/PSP06449.jpg", // Hero image, will be filtered out
-  "/IMG-20250414-WA0005.jpg",
-  "/IMG-20250414-WA0006.jpg",
-  "/IMG-20250414-WA0007.jpg",
+  "DSC06971.jpg",
+  "IMG_20240601_013652_478.jpg",
+  "IMG-20250414-WA0005.jpg",
+  "IMG-20250414-WA0006.jpg",
+  "IMG-20250414-WA0007.jpg",
   "/IMG-20250414-WA0008.jpg",
 ];
 
@@ -46,6 +48,8 @@ export default function NakulPortfolio() {
   const [lightboxIndex, setLightboxIndex] = useState(0);
   const [galleryType, setGalleryType] = useState('portfolio');
   const [imageDimensions, setImageDimensions] = useState<{ [key: string]: ImageDimensions }>({});
+  const [showHeader, setShowHeader] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
 
   useEffect(() => {
     // Function to load image and get dimensions
@@ -76,6 +80,30 @@ export default function NakulPortfolio() {
     loadAllImageDimensions();
   }, []); // Run only once on mount
 
+  // Effect for controlling header visibility on scroll
+  useEffect(() => {
+    const controlNavbar = () => {
+      if (typeof window !== 'undefined') { 
+        if (window.scrollY > lastScrollY && window.scrollY > 50) { // if scroll down hide the navbar
+          setShowHeader(false);
+        } else { // if scroll up show the navbar
+          setShowHeader(true);
+        }
+        // remember current page location to use in the next move
+        setLastScrollY(window.scrollY);
+      }
+    };
+
+    if (typeof window !== 'undefined') {
+      window.addEventListener('scroll', controlNavbar);
+
+      // cleanup function
+      return () => {
+        window.removeEventListener('scroll', controlNavbar);
+      };
+    }
+  }, [lastScrollY]);
+
   // Helper function to get dimensions or fallback
   const getDimensions = (src: string): ImageDimensions => {
     return imageDimensions[src] || { width: 3, height: 4 }; // Default portrait before loaded
@@ -102,9 +130,9 @@ export default function NakulPortfolio() {
 
   return (
     <main className="min-h-screen flex flex-col">
-      {/* Header/Navigation (Centered) */}
-      <header className="py-4 border-b sticky top-0 bg-white z-50">
-        <div className="container mx-auto flex justify-center items-center px-4 md:px-8">
+      {/* Header/Navigation (Auto-hiding) */}
+      <header className={`py-4 border-b sticky top-0 bg-white z-50 transition-transform duration-300 ${showHeader ? 'translate-y-0' : '-translate-y-full'}`}>
+        <div className="container mx-auto flex justify-center items-center px-4 md:px-8"> 
           <nav className="flex space-x-8">
             <a href="#about" className="nav-link">ABOUT</a>
             <a href="#portfolio" className="nav-link">ALL WORK</a>
@@ -114,12 +142,12 @@ export default function NakulPortfolio() {
 
       {/* Main Content - Hero Section */}
       <section id="about" className="container mx-auto py-12 md:py-16 px-4 md:px-8 scroll-mt-16">
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-5xl mx-auto"> 
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-start">
             {/* Left column - Profile & Info */}
             <div className="md:col-span-6 flex flex-col">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-medium font-cormorant tracking-tight mb-4 uppercase">NITHIN/SPIDEY</h1>
-
+  
               <p className="text-sm mb-6 mt-2">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae eros quis magna varius condimentum. 
                 Integer ac magna eget velit sagittis commodo eget vel nisi.
@@ -127,13 +155,13 @@ export default function NakulPortfolio() {
 
               {/* Buttons and Socials Row */}
               <div className="flex items-center space-x-6 mt-4 mb-8">
-                {/* Polaroids Button */}
-                <button className="font-sans text-sm uppercase border border-current px-3 py-1 hover:bg-gray-100 transition-colors">
+                {/* Polaroids Button (Updated Hover) */}
+                <button className="font-sans text-sm uppercase border border-current px-3 py-1 hover:border-opacity-70 hover:text-opacity-70 transition-opacity duration-200">
                   POLAROIDS
                 </button>
 
                 {/* Social Links */}
-                <div className="flex space-x-4">
+                <div className="flex space-x-4"> 
                   <Link href="mailto:models@anonmodels.com" className="opacity-70 hover:opacity-100">
                     <Mail size={20} />
                   </Link>
@@ -173,14 +201,14 @@ export default function NakulPortfolio() {
 
             {/* Profile Image */}
             <div className="md:col-span-5 relative w-full cursor-pointer" style={heroAspectRatioStyle}>
-              {imageDimensions[HERO_IMAGE] && (
+              {imageDimensions[HERO_IMAGE] && ( 
                 <Image
                   src={HERO_IMAGE}
                   alt="Nithin/Spidey portrait"
                   fill
                   className="object-cover object-center"
                   onClick={() => openLightbox([HERO_IMAGE], 0, 'profile')}
-                  priority
+                  priority 
                 />
               )}
             </div>
@@ -219,7 +247,7 @@ export default function NakulPortfolio() {
                   sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
                   className="object-cover"
                   onClick={() => openLightbox(portfolioImages, i, 'portfolio')}
-                  loading="lazy"
+                  loading="lazy" // Lazy load gallery images
                 />
               </div>
             );
