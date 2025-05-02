@@ -102,7 +102,7 @@ export default function NakulPortfolio() {
   return (
     <main className="min-h-screen flex flex-col">
       {/* Header/Navigation */}
-      <header className="py-4 border-b sticky top-0 bg-white z-50 shadow-sm">
+      <header className="py-4 border-b sticky top-0 bg-white z-50">
         <div className="container mx-auto flex justify-between items-center px-4 md:px-8">
           <Link href="/" className="text-xl font-medium">
             <Image
@@ -120,55 +120,57 @@ export default function NakulPortfolio() {
         </div>
       </header>
 
-      {/* Main Content - Hero Section (Smaller Image) */}
+      {/* Main Content - Hero Section (Constrained Width) */}
       <section id="about" className="container mx-auto py-12 md:py-16 px-4 md:px-8 scroll-mt-16">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-start">
-          {/* Left column - Profile & Info (Wider) */}
-          <div className="md:col-span-5 flex flex-col"> {/* Increased span */}
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-medium font-cormorant tracking-tight mb-4 uppercase">NITHIN/<br />SPIDEY</h1>
+        <div className="max-w-5xl mx-auto"> {/* Added max-width container */} 
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-start">
+            {/* Left column - Profile & Info */}
+            <div className="md:col-span-5 flex flex-col"> 
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-medium font-cormorant tracking-tight mb-4 uppercase">NITHIN/SPIDEY</h1>
 
-            <p className="text-sm mb-6 mt-2">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae eros quis magna varius condimentum. 
-              Integer ac magna eget velit sagittis commodo eget vel nisi.
-            </p>
+              <p className="text-sm mb-6 mt-2">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae eros quis magna varius condimentum. 
+                Integer ac magna eget velit sagittis commodo eget vel nisi.
+              </p>
 
-            {/* measurements */}
-            <div className="grid grid-cols-3 -gap-y-1 text-xs">
-              <div className="uppercase">HEIGHT</div>
-              <div className="uppercase">CHEST</div>
-              <div className="uppercase">WAIST</div>
-              <div className="font-bold uppercase">6'0"/183CM</div>
-              <div className="font-bold uppercase">37"/94CM</div>
-              <div className="font-bold uppercase">29"/74CM</div>
-              
-              <div className="uppercase mt-3">HIP</div>
-              <div className="uppercase mt-3">SHOE</div>
-              <div className="uppercase mt-3">HAIR</div>
-              <div className="font-bold uppercase">35"/89CM</div>
-              <div className="font-bold uppercase">45.5</div>
-              <div className="font-bold uppercase">BLACK</div>
+              {/* measurements */}
+              <div className="grid grid-cols-3 -gap-y-1 text-xs">
+                <div className="uppercase">HEIGHT</div>
+                <div className="uppercase">CHEST</div>
+                <div className="uppercase">WAIST</div>
+                <div className="font-bold uppercase">6'0"/183CM</div>
+                <div className="font-bold uppercase">37"/94CM</div>
+                <div className="font-bold uppercase">29"/74CM</div>
+                
+                <div className="uppercase mt-3">HIP</div>
+                <div className="uppercase mt-3">SHOE</div>
+                <div className="uppercase mt-3">HAIR</div>
+                <div className="font-bold uppercase">35"/89CM</div>
+                <div className="font-bold uppercase">45.5</div>
+                <div className="font-bold uppercase">BLACK</div>
+              </div>
+              <div className="grid grid-cols-1 -gap-y-1 text-xs mt-3">
+                <div className="uppercase">EYE COLOR</div>
+                <div className="font-bold uppercase">BROWN</div>
+                
+                <div className="uppercase mt-3">PRONOUNS</div>
+                <div className="font-bold uppercase">HE/HIM/HIS</div>
+              </div>
             </div>
-            <div className="grid grid-cols-1 -gap-y-1 text-xs mt-3">
-              <div className="uppercase">EYE COLOR</div>
-              <div className="font-bold uppercase">BROWN</div>
-              
-              <div className="uppercase mt-3">PRONOUNS</div>
-              <div className="font-bold uppercase">HE/HIM/HIS</div>
-            </div>
-          </div>
 
-          {/* Profile Image (Smaller) - Respecting original aspect ratio */}
-          <div className="md:col-span-7 relative w-full cursor-pointer" style={heroAspectRatioStyle}> {/* Decreased span */}
-            {imageDimensions[HERO_IMAGE] && ( // Render only when dimensions are loaded
-              <Image
-                src={HERO_IMAGE}
-                alt="Nithin/Spidey portrait"
-                fill
-                className="object-cover object-center"
-                onClick={() => openLightbox([HERO_IMAGE], 0, 'profile')}
-                priority // Prioritize loading the hero image
-              />
-            )}
+            {/* Profile Image - Respecting original aspect ratio */}
+            <div className="md:col-span-6 relative w-full cursor-pointer" style={heroAspectRatioStyle}> 
+              {imageDimensions[HERO_IMAGE] && ( // Render only when dimensions are loaded
+                <Image
+                  src={HERO_IMAGE}
+                  alt="Nithin/Spidey portrait"
+                  fill
+                  className="object-cover object-center"
+                  onClick={() => openLightbox([HERO_IMAGE], 0, 'profile')}
+                  priority // Prioritize loading the hero image
+                />
+              )}
+            </div>
           </div>
         </div>
       </section>
@@ -179,26 +181,24 @@ export default function NakulPortfolio() {
         <Separator className="mt-2" />
       </div>
 
-      {/* Image Gallery - Full Width Responsive Masonry Grid */}
-      <section className="w-full px-4 md:px-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      {/* Image Gallery - Full Bleed Responsive CSS Columns */}
+      <section className="w-full px-1"> {/* Slight padding for visual safety */}
+        <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-2"> 
           {portfolioImages.map((src, i) => {
             if (!imageDimensions[src]) {
-              // Optionally render a placeholder while dimensions load
-              return <div key={src} className="bg-gray-200 aspect-[3/4]"></div>; 
+              // Placeholder for loading state
+              return <div key={src} className="bg-gray-200 aspect-[3/4] mb-2"></div>; 
             }
-            const landscape = isLandscape(src);
             const dims = getDimensions(src);
-            // Adjust column span for landscape images across breakpoints
-            const colSpan = landscape 
-              ? "sm:col-span-2 md:col-span-2 lg:col-span-2" 
-              : "col-span-1";
             
             return (
               <div 
                 key={`portfolio-${i}-${src.substring(src.lastIndexOf('/') + 1)}`}
-                className={`${colSpan} relative cursor-pointer overflow-hidden`}
-                style={{ aspectRatio: `${dims.width} / ${dims.height}` }}
+                className={`relative mb-2 cursor-pointer overflow-hidden`} // Removed colSpan, added mb-2 for column gap visual 
+                style={{ 
+                  aspectRatio: `${dims.width} / ${dims.height}`,
+                  breakInside: 'avoid' // Prevent items breaking across columns
+                }}
               >
                 <Image
                   src={src}
@@ -215,77 +215,38 @@ export default function NakulPortfolio() {
         </div>
       </section>
 
-      {/* Footer - Icons only */}
-      <footer className="mt-auto bg-white py-8 border-t mt-16">
+      {/* Footer - Constrained Width & Increased Top Margin */}
+      <footer className="mt-24 bg-white py-8 border-t"> {/* Increased top margin */} 
         <div className="container mx-auto px-4 md:px-8">
-          <div className="flex flex-wrap justify-center gap-6">
-            {/* Social Icons Only */}
-            <Link href="https://www.behance.net/anonmodels" target="_blank" className="opacity-70 hover:opacity-100">
-              <Image
-                src="https://ext.same-assets.com/2891512280/3091884418.png"
-                alt="Behance"
-                width={24}
-                height={24}
-              />
-            </Link>
-            <Link href="mailto:models@anonmodels.com" className="opacity-70 hover:opacity-100">
-              <Image
-                src="https://ext.same-assets.com/2891512280/3316129701.webp"
-                alt="Email"
-                width={24}
-                height={24}
-              />
-            </Link>
-            <Link href="https://www.pinterest.it/anonmodels/" target="_blank" className="opacity-70 hover:opacity-100">
-              <Image
-                src="https://ext.same-assets.com/2891512280/1244889337.png"
-                alt="Pinterest"
-                width={24}
-                height={24}
-              />
-            </Link>
-            <Link href="https://www.tiktok.com/@anonmodels.in" target="_blank" className="opacity-70 hover:opacity-100">
-              <Image
-                src="https://ext.same-assets.com/2891512280/3822963496.png"
-                alt="TikTok"
-                width={24}
-                height={24}
-              />
-            </Link>
-            <Link href="https://www.instagram.com/anonmodels.in" target="_blank" className="opacity-70 hover:opacity-100">
-              <Image
-                src="https://ext.same-assets.com/2891512280/415325346.png"
-                alt="Instagram"
-                width={24}
-                height={24}
-              />
-            </Link>
-            <Link href="https://www.linkedin.com/company/anon-models-llp" target="_blank" className="opacity-70 hover:opacity-100">
-              <Image
-                src="https://ext.same-assets.com/2891512280/2761650577.webp"
-                alt="LinkedIn"
-                width={24}
-                height={24}
-              />
-            </Link>
-            <Link href="https://models.com/agency/anon-models" target="_blank" className="opacity-70 hover:opacity-100">
-              <Image
-                src="https://ext.same-assets.com/2891512280/4134508662.png"
-                alt="Models.com"
-                width={24}
-                height={24}
-              />
-            </Link>
-            <Link href="https://www.facebook.com/anonmodelmanagement/" target="_blank" className="opacity-70 hover:opacity-100">
-              <Image
-                src="https://ext.same-assets.com/2891512280/2784159118.png"
-                alt="Facebook"
-                width={24}
-                height={24}
-              />
-            </Link>
+          <div className="max-w-xl mx-auto"> {/* Constrained width container */} 
+            <div className="flex flex-wrap justify-center gap-6">
+              {/* Social Icons Filtered */}
+              <Link href="mailto:models@anonmodels.com" className="opacity-70 hover:opacity-100">
+                <Image
+                  src="https://ext.same-assets.com/2891512280/3316129701.webp"
+                  alt="Email"
+                  width={24}
+                  height={24}
+                />
+              </Link>
+              <Link href="https://www.instagram.com/anonmodels.in" target="_blank" className="opacity-70 hover:opacity-100">
+                <Image
+                  src="https://ext.same-assets.com/2891512280/415325346.png"
+                  alt="Instagram"
+                  width={24}
+                  height={24}
+                />
+              </Link>
+              <Link href="https://www.linkedin.com/company/anon-models-llp" target="_blank" className="opacity-70 hover:opacity-100">
+                <Image
+                  src="https://ext.same-assets.com/2891512280/2761650577.webp"
+                  alt="LinkedIn"
+                  width={24}
+                  height={24}
+                />
+              </Link>
+            </div>
           </div>
-          {/* Removed text links div */}
         </div>
       </footer>
 
