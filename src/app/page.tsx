@@ -1,85 +1,88 @@
 'use client';
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Separator } from "@/components/ui/separator";
 import Lightbox from "@/components/lightbox";
 
-const portfolioImages = [
-  "https://ext.same-assets.com/2891512280/917374722.png",
-  "https://ext.same-assets.com/2891512280/2268899401.jpeg",
-  "https://ext.same-assets.com/2891512280/1644936293.jpeg",
-  "https://ext.same-assets.com/2891512280/4248680396.jpeg",
-  "https://ext.same-assets.com/2891512280/1035341562.jpeg",
-  "https://ext.same-assets.com/2891512280/3894711642.jpeg",
-  "https://ext.same-assets.com/2891512280/996491070.jpeg",
-  "https://ext.same-assets.com/2891512280/3652818179.jpeg",
-  "https://ext.same-assets.com/2891512280/227102238.jpeg",
-  "https://ext.same-assets.com/2891512280/587219674.jpeg",
-  "https://ext.same-assets.com/2891512280/2016239768.jpeg",
-  "https://ext.same-assets.com/2891512280/2223382105.jpeg",
-  "https://ext.same-assets.com/2891512280/1146691142.jpeg",
-  "https://ext.same-assets.com/2891512280/542610533.png",
-  "https://ext.same-assets.com/2891512280/1378629045.jpeg",
-  "https://ext.same-assets.com/2891512280/3859846694.jpeg",
-  "https://ext.same-assets.com/2891512280/3051783193.png",
-  "https://ext.same-assets.com/2891512280/2846154091.png",
-  "https://ext.same-assets.com/2891512280/3698902223.jpeg",
-  "https://ext.same-assets.com/2891512280/887874404.jpeg",
+// Hero image path - to exclude from portfolio
+const HERO_IMAGE = "/PSP06449.jpg";
+
+// We'll use these images from the public folder
+const allImages = [
+  "/DSC06002.jpg",
+  "/DSC06700.jpg",
+  "/DSC05908.jpg",
+  "/DSC05764.jpg",
+  "/PSP06633.JPG",
+  "/PSP06518.JPG",
+  "/PSP06485.jpg",
+  "/PSP06604.JPG",
+  "/PSP06609.JPG",
+  "/PSP06627.JPG",
+  "/PSP06657.JPG",
+  "/PSP06562.jpg",
+  "/PSP06450.jpg",
+  "/PSP06444.jpg",
+  "/PSP06449.jpg",
+  "/IMG-20250414-WA0005.jpg",
+  "/IMG-20250414-WA0006.jpg",
+  "/IMG-20250414-WA0007.jpg",
+  "/IMG-20250414-WA0008.jpg",
 ];
 
-const fashionShowImages = [
-  "https://static.wixstatic.com/media/b52b2f_8ce16fcdf09945258f9ee89e2cae60ec~mv2.png/v1/fit/w_480,h_721,q_90,enc_avif,quality_auto/b52b2f_8ce16fcdf09945258f9ee89e2cae60ec~mv2.png",
-  "https://static.wixstatic.com/media/b52b2f_159c64298193465dbdf183729f7c104d~mv2.jpg/v1/fit/w_480,h_721,q_90,enc_avif,quality_auto/b52b2f_159c64298193465dbdf183729f7c104d~mv2.jpg",
-  "https://static.wixstatic.com/media/b52b2f_09a6b7f12adb4c12b5c1477b95cd744e~mv2.png/v1/fit/w_480,h_721,q_90,enc_avif,quality_auto/b52b2f_09a6b7f12adb4c12b5c1477b95cd744e~mv2.png",
-  "https://static.wixstatic.com/media/b52b2f_735e984c88254b628aa4960f6cecd34d~mv2.jpg/v1/fit/w_480,h_721,q_90,enc_avif,quality_auto/b52b2f_735e984c88254b628aa4960f6cecd34d~mv2.jpg",
-  "https://static.wixstatic.com/media/b52b2f_dacfe6b56e074e81a22a2e430cc6a937~mv2.jpg/v1/fit/w_480,h_723,q_90,enc_avif,quality_auto/b52b2f_dacfe6b56e074e81a22a2e430cc6a937~mv2.jpg",
-  "https://static.wixstatic.com/media/b52b2f_793330a6b0df4c5a84b62b4546a2f320~mv2.jpg/v1/fit/w_480,h_721,q_90,enc_avif,quality_auto/b52b2f_793330a6b0df4c5a84b62b4546a2f320~mv2.jpg",
-  "https://static.wixstatic.com/media/b52b2f_8b86ca67005f446bb637b51d363821d9~mv2.png/v1/fit/w_480,h_600,q_90,enc_avif,quality_auto/b52b2f_8b86ca67005f446bb637b51d363821d9~mv2.png",
-  "https://static.wixstatic.com/media/b52b2f_170bd887c0bc4dd294b0b9be2351e4a0~mv2.jpg/v1/fit/w_480,h_721,q_90,enc_avif,quality_auto/b52b2f_170bd887c0bc4dd294b0b9be2351e4a0~mv2.jpg",
-  "https://static.wixstatic.com/media/b52b2f_9a0a46a025084eb286b98b523b8f0c09~mv2.jpg/v1/fit/w_480,h_856,q_90,enc_avif,quality_auto/b52b2f_9a0a46a025084eb286b98b523b8f0c09~mv2.jpg",
-];
-
-// Fashion show details
-const fashionShowDetails = [
-  {
-    id: "vivienne-westwood-fw24",
-    name: "Vivienne Westwood FW24",
-    location: "Paris Fashion Week",
-    date: "March 2024",
-    designer: "Vivienne Westwood",
-    description: "Showcasing the latest Vivienne Westwood Fall/Winter 2024 collection in Paris."
-  },
-  {
-    id: "prada-ss24",
-    name: "Prada SS24",
-    location: "Milan Fashion Week",
-    date: "September 2023",
-    designer: "Miuccia Prada & Raf Simons",
-    description: "Walking for Prada's Spring/Summer 2024 menswear collection."
-  },
-  {
-    id: "louis-vuitton-fw23",
-    name: "Louis Vuitton FW23",
-    location: "Paris Fashion Week",
-    date: "January 2023",
-    designer: "Louis Vuitton",
-    description: "Featured in the Louis Vuitton Fall/Winter 2023 show."
-  }
-];
+// Filter out the hero image
+const portfolioImages = allImages.filter(img => img !== HERO_IMAGE);
 
 export default function NakulPortfolio() {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxImages, setLightboxImages] = useState<string[]>([]);
   const [lightboxIndex, setLightboxIndex] = useState(0);
   const [galleryType, setGalleryType] = useState('portfolio');
+  const [imageAspectRatios, setImageAspectRatios] = useState<{[key: string]: number}>({});
+
+  useEffect(() => {
+    // Function to load image and calculate aspect ratio
+    const calculateAspectRatio = async (src: string) => {
+      return new Promise<number>((resolve) => {
+        const img = new window.Image();
+        img.onload = () => {
+          resolve(img.width / img.height);
+        };
+        img.src = src;
+      });
+    };
+
+    // Calculate aspect ratios for all portfolio images
+    const loadAspectRatios = async () => {
+      const ratios: {[key: string]: number} = {};
+      
+      for (const src of portfolioImages) {
+        try {
+          ratios[src] = await calculateAspectRatio(src);
+        } catch (error) {
+          console.error(`Error loading image ${src}:`, error);
+          ratios[src] = 0.75; // Default to portrait aspect ratio
+        }
+      }
+      
+      setImageAspectRatios(ratios);
+    };
+
+    loadAspectRatios();
+  }, []);
 
   const openLightbox = (images: string[], index: number, type: string) => {
     setLightboxImages(images);
     setLightboxIndex(index);
     setGalleryType(type);
     setLightboxOpen(true);
+  };
+
+  const isLandscape = (src: string) => {
+    const ratio = imageAspectRatios[src] || 0.75;
+    return ratio >= 1;
   };
 
   return (
@@ -97,10 +100,8 @@ export default function NakulPortfolio() {
             />
           </Link>
           <nav className="flex space-x-8">
-            <a href="#portfolio" className="nav-link">ALL WORK</a>
-            <a href="#fashion-shows" className="nav-link">SHOWS</a>
-            <a href="#video" className="nav-link">VIDEO</a>
             <a href="#about" className="nav-link">ABOUT</a>
+            <a href="#portfolio" className="nav-link">ALL WORK</a>
           </nav>
         </div>
       </header>
@@ -145,11 +146,11 @@ export default function NakulPortfolio() {
           {/* Profile Image */}
           <div className="md:col-span-9 relative h-[600px] md:h-[700px] cursor-pointer">
             <Image
-              src="/PSP06449.jpg"
+              src={HERO_IMAGE}
               alt="Nithin/Spidey portrait"
               fill
               className="object-cover object-center"
-              onClick={() => openLightbox(["/PSP06449.jpg"], 0, 'profile')}
+              onClick={() => openLightbox([HERO_IMAGE], 0, 'profile')}
             />
           </div>
         </div>
@@ -161,155 +162,29 @@ export default function NakulPortfolio() {
         <Separator className="mt-2" />
       </div>
 
-      {/* Image Gallery */}
-      <section className="container mx-auto px-4 md:px-8 py-8">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
-          {/* First row - wide image and square image */}
-          <div className="md:col-span-8 relative aspect-[16/9]">
-            <Image
-              src={portfolioImages[0]}
-              alt="Portfolio image 1"
-              fill
-              className="object-cover"
-              onClick={() => openLightbox([portfolioImages[0]], 0, 'portfolio')}
-            />
-          </div>
-          <div className="md:col-span-4 relative aspect-square">
-            <Image
-              src={portfolioImages[1]}
-              alt="Portfolio image 2"
-              fill
-              className="object-cover"
-              onClick={() => openLightbox([portfolioImages[1]], 0, 'portfolio')}
-            />
-          </div>
-
-          {/* Second row - square image and wide image */}
-          <div className="md:col-span-4 relative aspect-square">
-            <Image
-              src={portfolioImages[2]}
-              alt="Portfolio image 3"
-              fill
-              className="object-cover"
-              onClick={() => openLightbox([portfolioImages[2]], 0, 'portfolio')}
-            />
-          </div>
-          <div className="md:col-span-8 relative aspect-[16/9]">
-            <Image
-              src={portfolioImages[3]}
-              alt="Portfolio image 4"
-              fill
-              className="object-cover"
-              onClick={() => openLightbox([portfolioImages[3]], 0, 'portfolio')}
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* Presentation Video Section */}
-      <div id="video" className="container mx-auto px-4 md:px-8 py-8 mt-16 scroll-mt-16">
-        <h2 className="text-lg uppercase tracking-wide">PRESENTATION VIDEO</h2>
-        <Separator className="mt-2" />
-      </div>
-
-      <section className="container mx-auto px-4 md:px-8 py-8">
-        <div className="aspect-video w-full md:w-3/4 lg:w-2/3 mx-auto relative bg-gray-100">
-          {/* Since we don't have an actual video for Nakul, we're placing a placeholder */}
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="flex flex-col items-center">
-              <svg
-                className="w-16 h-16 text-gray-400"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"
-                />
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
-              <p className="mt-4 text-gray-500">Video Presentation</p>
-            </div>
-          </div>
-        </div>
-        <div className="mt-4 flex justify-center items-center gap-2">
-          <div className="w-16 h-1 bg-black" />
-          <span className="text-xs">00:00 / 00:27</span>
-        </div>
-      </section>
-
-      {/* Fashion Shows Section */}
-      <div id="fashion-shows" className="container mx-auto px-4 md:px-8 py-8 mt-16 scroll-mt-16">
-        <h2 className="text-lg uppercase tracking-wide">FASHION SHOWS</h2>
-        <Separator className="mt-2" />
-      </div>
-
-      {/* Fashion Show Details */}
-      <section className="container mx-auto px-4 md:px-8 pb-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-          {fashionShowDetails.map((show) => (
-            <div key={show.id} className="border p-4 hover:shadow-md transition-shadow">
-              <h3 className="font-cormorant text-xl font-medium mb-2">{show.name}</h3>
-              <p className="text-sm mb-1"><span className="font-medium">Location:</span> {show.location}</p>
-              <p className="text-sm mb-1"><span className="font-medium">Date:</span> {show.date}</p>
-              <p className="text-sm mb-1"><span className="font-medium">Designer:</span> {show.designer}</p>
-              <p className="text-sm mt-3 text-gray-600">{show.description}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Fashion Shows Gallery */}
+      {/* Image Gallery - Masonry grid with original aspect ratios */}
       <section className="container mx-auto px-4 md:px-8">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
-          {/* First row - wide image and square image */}
-          <div className="md:col-span-8 relative aspect-[16/9]">
-            <Image
-              src={fashionShowImages[0]}
-              alt="Fashion show image 1"
-              fill
-              className="object-cover"
-              onClick={() => openLightbox([fashionShowImages[0]], 0, 'fashion')}
-            />
-          </div>
-          <div className="md:col-span-4 relative aspect-square">
-            <Image
-              src={fashionShowImages[1]}
-              alt="Fashion show image 2"
-              fill
-              className="object-cover"
-              onClick={() => openLightbox([fashionShowImages[1]], 0, 'fashion')}
-            />
-          </div>
-
-          {/* Second row - square image and wide image */}
-          <div className="md:col-span-4 relative aspect-square">
-            <Image
-              src={fashionShowImages[2]}
-              alt="Fashion show image 3"
-              fill
-              className="object-cover"
-              onClick={() => openLightbox([fashionShowImages[2]], 0, 'fashion')}
-            />
-          </div>
-          <div className="md:col-span-8 relative aspect-[16/9]">
-            <Image
-              src={fashionShowImages[3]}
-              alt="Fashion show image 4"
-              fill
-              className="object-cover"
-              onClick={() => openLightbox([fashionShowImages[3]], 0, 'fashion')}
-            />
-          </div>
+          {portfolioImages.map((src, i) => {
+            // Set column span based on aspect ratio
+            const colSpan = isLandscape(src) ? "md:col-span-8" : "md:col-span-4";
+            const aspect = isLandscape(src) ? "aspect-[4/3]" : "aspect-[3/4]";
+            
+            return (
+              <div 
+                key={`portfolio-${i}-${src.substring(src.lastIndexOf('/') + 1, src.lastIndexOf('.'))}`}
+                className={`${colSpan} relative ${aspect} cursor-pointer overflow-hidden`}
+              >
+                <Image
+                  src={src}
+                  alt={`Portfolio image ${i + 1}`}
+                  fill
+                  className="object-cover"
+                  onClick={() => openLightbox([src], 0, 'portfolio')}
+                />
+              </div>
+            );
+          })}
         </div>
       </section>
 
@@ -386,8 +261,6 @@ export default function NakulPortfolio() {
           <div className="mt-8 flex flex-wrap justify-center gap-6 text-sm">
             <a href="#about" className="text-gray-600 hover:text-black">ABOUT</a>
             <a href="#portfolio" className="text-gray-600 hover:text-black">PORTFOLIO</a>
-            <a href="#video" className="text-gray-600 hover:text-black">VIDEO</a>
-            <a href="#fashion-shows" className="text-gray-600 hover:text-black">SHOWS</a>
             <Link href="https://www.anonmodels.com" className="text-gray-600 hover:text-black">HOME</Link>
             <Link href="https://www.anonmodels.com/delhi" className="text-gray-600 hover:text-black">DELHI</Link>
             <Link href="https://www.anonmodels.com/copy-of-delhi" className="text-gray-600 hover:text-black">MUMBAI</Link>
