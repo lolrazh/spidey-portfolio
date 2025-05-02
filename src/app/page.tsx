@@ -105,103 +105,52 @@ export default function NakulPortfolio() {
         </div>
       </header>
 
-      {/* Main Content */}
+      {/* Main Content - Hero Section */}
       <section id="about" className="container mx-auto py-12 md:py-16 px-4 md:px-8 scroll-mt-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12">
           {/* Left column - Profile & Info */}
-          <div className="flex flex-col space-y-8">
-            <h1 className="text-5xl font-medium font-cormorant">NAKUL B.</h1>
+          <div className="md:col-span-3 flex flex-col">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-medium font-cormorant tracking-wider mb-8 uppercase">NITHIN/<br />SPIDEY</h1>
 
-            <div className="flex space-x-4">
-              <Link
-                href="mailto:booking@anonmodels.com?subject=MODEL%20CARD%20%22NAKUL%22"
-                className="underline text-sm uppercase"
-              >
-                MODEL CARD
-              </Link>
-              <Link
-                href="mailto:booking@anonmodels.com?subject=POLAROID%20CARD%20%22NAKUL%22"
-                className="underline text-sm uppercase"
-              >
-                POLAROIDS
-              </Link>
-            </div>
-
-            <p className="text-base">
-              Greetings, I&apos;m Nakul. I recently turned 21 years old, and I&apos;ve always enjoyed to compete in virtually anything and be the best at what I do. I&apos;ve been fascinated by high-adrenaline sports like parkour since I was seven years old, and I enjoy sports in general. My mother is the one who inspires me to work hard and consistently. I have always loved modeling and have looked up to many of the greatest models in the business. I hope to reach the top someday.
+            <p className="text-sm mb-4 mt-2">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae eros quis magna varius condimentum. 
+              Integer ac magna eget velit sagittis commodo eget vel nisi.
             </p>
 
-            <div className="grid grid-cols-2 gap-4 text-sm">
-              <div>
-                <p>HEIGHT 6&apos;3&quot;</p>
-                <p>CHEST 36</p>
-                <p>WAIST 26</p>
-                <p>HIPS 36</p>
-                <p>SHOE SIZE 45</p>
-              </div>
-              <div>
-                <p>TOP SIZE M</p>
-                <p>BOTTOM SIZE 29/30</p>
-                <p>EYE COLOR BLACK</p>
-                <p>HAIR COLOR DARK BROWN</p>
-              </div>
+            {/* measurements */}
+            <div className="grid grid-cols-3 -gap-y-1 text-xs">
+              <div className="uppercase">HEIGHT</div>
+              <div className="uppercase">CHEST</div>
+              <div className="uppercase">WAIST</div>
+              <div className="font-bold uppercase">6'0"/183CM</div>
+              <div className="font-bold uppercase">37"/94CM</div>
+              <div className="font-bold uppercase">29"/74CM</div>
+              
+              <div className="uppercase mt-3">HIP</div>
+              <div className="uppercase mt-3">SHOE</div>
+              <div className="uppercase mt-3">HAIR</div>
+              <div className="font-bold uppercase">35"/89CM</div>
+              <div className="font-bold uppercase">45.5</div>
+              <div className="font-bold uppercase">BLACK</div>
             </div>
-
-            <div className="flex flex-wrap gap-4 pt-4">
-              <Link href="https://models.com/models/nakul-bhardwaj" target="_blank">
-                <Image
-                  src="https://ext.same-assets.com/2891512280/502141871.png"
-                  alt="ModelsDot"
-                  width={100}
-                  height={40}
-                  className="object-contain"
-                />
-              </Link>
-              <Link href="https://www.nextmanagement.com/milan/milan-men-new-faces/all/2508668/nakul-bhardawaj#portfolio" target="_blank" className="text-sm uppercase font-medium">
-                NEXT
-              </Link>
-              <Link href="https://www.nextmanagement.com/paris/paris-men-new-faces/all/2508668/nakul-bhardawaj#portfolio" target="_blank" className="text-sm uppercase font-medium">
-                NEXT
-              </Link>
-              <Link href="https://milkmanagement.co.uk/clients/nakul" target="_blank" className="text-sm uppercase font-medium">
-                THE MILK COLLECTIVE
-              </Link>
-              <Link href="https://tigers-mgmt.com/w/models/search/nakul/men-4605-nakul-bhardwaj" target="_blank" className="text-sm uppercase font-medium">
-                TIGERS
-              </Link>
-              <Link href="https://www.kultmodels.se/sedcard/nakul-bhardwaj/4282" target="_blank" className="text-sm uppercase font-medium">
-                KULT
-              </Link>
-              <Link href="https://www.dnamodels.com/div/men-development/model/nakul-bhardwaj2/p/11520/c/-1/?sid=63053/" target="_blank" className="text-sm uppercase font-medium">
-                DNA
-              </Link>
-              <Link href="https://www.brooksmodelingagency.com/men/new-faces/1190-nakul-b/" target="_blank" className="text-sm uppercase font-medium">
-                BROOKS
-              </Link>
+            <div className="grid grid-cols-1 -gap-y-1 text-xs mt-3">
+              <div className="uppercase">EYE COLOR</div>
+              <div className="font-bold uppercase">BROWN</div>
+              
+              <div className="uppercase mt-3">PRONOUNS</div>
+              <div className="font-bold uppercase">HE/HIM/HIS</div>
             </div>
           </div>
 
-          {/* Right column - Profile Image */}
-          <div
-            className="relative h-[600px] md:h-[700px] cursor-pointer"
-            onClick={() => openLightbox([
-              "https://ext.same-assets.com/2891512280/3892006042.jpeg"
-            ], 0, 'profile')}
-          >
+          {/* Profile Image */}
+          <div className="md:col-span-9 relative h-[600px] md:h-[700px] cursor-pointer">
             <Image
-              src="https://ext.same-assets.com/2891512280/3892006042.jpeg"
-              alt="Nakul Bhardwaj"
+              src="https://img.freepik.com/free-photo/portrait-young-man-studio_23-2150773420.jpg"
+              alt="Alejandro portrait"
               fill
               className="object-cover object-center"
+              onClick={() => openLightbox(["https://img.freepik.com/free-photo/portrait-young-man-studio_23-2150773420.jpg"], 0, 'profile')}
             />
-            <div className="absolute bottom-4 right-4 bg-black/40 text-white p-2 rounded-full opacity-0 hover:opacity-100 transition-opacity">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-zoom-in">
-                <circle cx="11" cy="11" r="8" />
-                <path d="m21 21-4.3-4.3" />
-                <path d="M11 8v6" />
-                <path d="M8 11h6" />
-              </svg>
-            </div>
           </div>
         </div>
       </section>
