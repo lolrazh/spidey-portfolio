@@ -117,7 +117,7 @@ export default function NakulPortfolio() {
         <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-start">
             {/* Left column - Profile & Info */}
-            <div className="md:col-span-5 flex flex-col"> 
+            <div className="md:col-span-6 flex flex-col">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-medium font-cormorant tracking-tight mb-4 uppercase">NITHIN/SPIDEY</h1>
 
               <p className="text-sm mb-6 mt-2">
@@ -125,20 +125,25 @@ export default function NakulPortfolio() {
                 Integer ac magna eget velit sagittis commodo eget vel nisi.
               </p>
 
-              {/* Polaroids Button */}
-              <button className="nav-link text-left w-fit mb-4">POLAROIDS</button>
+              {/* Buttons and Socials Row */}
+              <div className="flex items-center space-x-6 mt-4 mb-8">
+                {/* Polaroids Button */}
+                <button className="font-sans text-sm uppercase border border-current px-3 py-1 hover:bg-gray-100 transition-colors">
+                  POLAROIDS
+                </button>
 
-              {/* Social Links */}
-              <div className="flex space-x-4 mb-6">
-                <Link href="mailto:models@anonmodels.com" className="opacity-70 hover:opacity-100">
-                  <Mail size={20} />
-                </Link>
-                <Link href="https://www.instagram.com/anonmodels.in" target="_blank" className="opacity-70 hover:opacity-100">
-                  <Instagram size={20} />
-                </Link>
-                <Link href="https://www.linkedin.com/company/anon-models-llp" target="_blank" className="opacity-70 hover:opacity-100">
-                   <Linkedin size={20} />
-                </Link>
+                {/* Social Links */}
+                <div className="flex space-x-4">
+                  <Link href="mailto:models@anonmodels.com" className="opacity-70 hover:opacity-100">
+                    <Mail size={20} />
+                  </Link>
+                  <Link href="https://www.instagram.com/anonmodels.in" target="_blank" className="opacity-70 hover:opacity-100">
+                    <Instagram size={20} />
+                  </Link>
+                  <Link href="https://www.linkedin.com/company/anon-models-llp" target="_blank" className="opacity-70 hover:opacity-100">
+                    <Linkedin size={20} />
+                  </Link>
+                </div>
               </div>
 
               {/* measurements */}
@@ -167,7 +172,7 @@ export default function NakulPortfolio() {
             </div>
 
             {/* Profile Image */}
-            <div className="md:col-span-7 relative w-full cursor-pointer" style={heroAspectRatioStyle}>
+            <div className="md:col-span-5 relative w-full cursor-pointer" style={heroAspectRatioStyle}>
               {imageDimensions[HERO_IMAGE] && (
                 <Image
                   src={HERO_IMAGE}
@@ -184,8 +189,8 @@ export default function NakulPortfolio() {
       </section>
 
       {/* "All Work" Section Label */}
-      <div id="portfolio" className="container mx-auto px-4 md:px-8 py-8 scroll-mt-16">
-        <h2 className="text-lg font-sans font-bold uppercase">ALL WORK</h2>
+      <div id="portfolio" className="px-4 md:px-8 py-6 scroll-mt-16">
+        <h2 className="text-2xl font-sans font-bold uppercase">ALL WORK</h2>
       </div>
 
       {/* Image Gallery - Full Bleed Responsive CSS Columns */}
@@ -228,13 +233,13 @@ export default function NakulPortfolio() {
           <div className="max-w-xl mx-auto">
             <div className="flex flex-wrap justify-center gap-6">
               <Link href="mailto:models@anonmodels.com" className="opacity-70 hover:opacity-100">
-                 <Mail size={24} />
+                 <Mail size={20} />
               </Link>
               <Link href="https://www.instagram.com/anonmodels.in" target="_blank" className="opacity-70 hover:opacity-100">
-                <Instagram size={24} />
+                <Instagram size={20} />
               </Link>
               <Link href="https://www.linkedin.com/company/anon-models-llp" target="_blank" className="opacity-70 hover:opacity-100">
-                <Linkedin size={24} />
+                <Linkedin size={20} />
               </Link>
             </div>
           </div>
