@@ -30,9 +30,9 @@ const allImages = [
   "/PSP06449.jpg", // Hero image, will be filtered out
   "DSC06971.jpg",
   "IMG_20240601_013652_478.jpg",
-  "IMG-20250414-WA0005.jpg",
-  "IMG-20250414-WA0006.jpg",
-  "IMG-20250414-WA0007.jpg",
+  "/IMG-20250414-WA0005.jpg",
+  "/IMG-20250414-WA0006.jpg",
+  "/IMG-20250414-WA0007.jpg",
   "/IMG-20250414-WA0008.jpg",
 ];
 
@@ -154,22 +154,22 @@ export default function NakulPortfolio() {
               </p>
 
               {/* Buttons and Socials Row */}
-              <div className="flex items-center space-x-6 mt-4 mb-8">
-                {/* Polaroids Button (Updated Hover) */}
-                <button className="font-sans text-sm uppercase border border-current px-3 py-1 hover:border-opacity-70 hover:text-opacity-70 transition-opacity duration-200">
+              <div className="flex items-center space-x-8 mt-4 mb-8">
+                {/* Polaroids Button (Styled as Nav Link) */}
+                <button className="font-sans text-sm uppercase tracking-wider hover:opacity-70 transition-opacity duration-200">
                   POLAROIDS
                 </button>
 
-                {/* Social Links */}
-                <div className="flex space-x-4"> 
+                {/* Social Links (Thinner stroke, more space) */}
+                <div className="flex space-x-6">
                   <Link href="mailto:models@anonmodels.com" className="opacity-70 hover:opacity-100">
-                    <Mail size={20} />
+                    <Mail size={20} strokeWidth={1.5} />
                   </Link>
                   <Link href="https://www.instagram.com/anonmodels.in" target="_blank" className="opacity-70 hover:opacity-100">
-                    <Instagram size={20} />
+                    <Instagram size={20} strokeWidth={1.5} />
                   </Link>
                   <Link href="https://www.linkedin.com/company/anon-models-llp" target="_blank" className="opacity-70 hover:opacity-100">
-                    <Linkedin size={20} />
+                    <Linkedin size={20} strokeWidth={1.5} />
                   </Link>
                 </div>
               </div>
@@ -261,13 +261,13 @@ export default function NakulPortfolio() {
           <div className="max-w-xl mx-auto">
             <div className="flex flex-wrap justify-center gap-6">
               <Link href="mailto:models@anonmodels.com" className="opacity-70 hover:opacity-100">
-                 <Mail size={20} />
+                 <Mail size={20} strokeWidth={1.5}/>
               </Link>
               <Link href="https://www.instagram.com/anonmodels.in" target="_blank" className="opacity-70 hover:opacity-100">
-                <Instagram size={20} />
+                <Instagram size={20} strokeWidth={1.5}/>
               </Link>
               <Link href="https://www.linkedin.com/company/anon-models-llp" target="_blank" className="opacity-70 hover:opacity-100">
-                <Linkedin size={20} />
+                <Linkedin size={20} strokeWidth={1.5}/>
               </Link>
             </div>
           </div>
@@ -281,6 +281,7 @@ export default function NakulPortfolio() {
         images={portfolioImages}
         currentIndex={lightboxIndex}
         galleryType={galleryType}
+        imageDimensions={imageDimensions}
       />
     </main>
   );

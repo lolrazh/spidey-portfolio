@@ -4,15 +4,25 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 
+// Add imageDimensions to props
+type ImageDimensions = { width: number; height: number };
 interface LightboxProps {
   isOpen: boolean;
   onClose: () => void;
   images: string[];
   currentIndex: number;
   galleryType: string;
+  imageDimensions: { [key: string]: ImageDimensions }; // Accept dimensions object
 }
 
-export default function Lightbox({ isOpen, onClose, images, currentIndex, galleryType }: LightboxProps) {
+export default function Lightbox({ 
+  isOpen, 
+  onClose, 
+  images, 
+  currentIndex, 
+  galleryType, 
+  imageDimensions // Destructure new prop
+}: LightboxProps) {
   const [index, setIndex] = useState(currentIndex);
 
   useEffect(() => {
@@ -51,6 +61,10 @@ export default function Lightbox({ isOpen, onClose, images, currentIndex, galler
   }, [isOpen]);
 
   if (!isOpen || images.length === 0) return null;
+
+  // Get dimensions for the current image
+  const currentImageSrc = images[index];
+  const currentDimensions = imageDimensions[currentImageSrc] || { width: 800, height: 1000 }; // Fallback dimensions
 
   return (
     <div
@@ -95,17 +109,16 @@ export default function Lightbox({ isOpen, onClose, images, currentIndex, galler
         className="relative h-[90vh] w-full max-w-screen-lg flex items-center justify-center"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="relative max-h-full max-w-full">
-          <Image
-            key={images[index]}
-            src={images[index]}
-            alt={`Image ${index + 1}`}
-            fill
-            className="object-contain"
-            priority={index === currentIndex}
-            unoptimized
-          />
-        </div>
+        <Image
+          key={currentImageSrc}
+          src={currentImageSrc}
+          alt={`Image ${index + 1}`}
+          width={currentDimensions.width}
+          height={currentDimensions.height}
+          className="object-contain max-h-[90vh] max-w-[90vw] w-auto h-auto"
+          priority={index === currentIndex}
+          unoptimized
+        />
       </div>
     </div>
   );
