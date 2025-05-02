@@ -16,8 +16,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "NAKUL BHARDWAJ | AnonModels",
-  description: "Model portfolio for Nakul Bhardwaj",
+  title: "NITHIN/SPIDEY",
+  description: "Model portfolio for Nithin/Spidey",
 };
 
 export default function RootLayout({

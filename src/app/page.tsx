@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Separator } from "@/components/ui/separator";
 import Lightbox from "@/components/lightbox";
+import { Mail, Instagram, Linkedin } from 'lucide-react';
 
 // Hero image path - to exclude from portfolio
 const HERO_IMAGE = "/PSP06449.jpg";
@@ -101,18 +102,9 @@ export default function NakulPortfolio() {
 
   return (
     <main className="min-h-screen flex flex-col">
-      {/* Header/Navigation */}
+      {/* Header/Navigation (Centered) */}
       <header className="py-4 border-b sticky top-0 bg-white z-50">
-        <div className="container mx-auto flex justify-between items-center px-4 md:px-8">
-          <Link href="/" className="text-xl font-medium">
-            <Image
-              src="https://ext.same-assets.com/2891512280/502141871.png"
-              alt="Logo"
-              width={50}
-              height={25}
-              className="object-contain opacity-0"
-            />
-          </Link>
+        <div className="container mx-auto flex justify-center items-center px-4 md:px-8">
           <nav className="flex space-x-8">
             <a href="#about" className="nav-link">ABOUT</a>
             <a href="#portfolio" className="nav-link">ALL WORK</a>
@@ -120,9 +112,9 @@ export default function NakulPortfolio() {
         </div>
       </header>
 
-      {/* Main Content - Hero Section (Constrained Width) */}
+      {/* Main Content - Hero Section */}
       <section id="about" className="container mx-auto py-12 md:py-16 px-4 md:px-8 scroll-mt-16">
-        <div className="max-w-5xl mx-auto"> {/* Added max-width container */} 
+        <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-start">
             {/* Left column - Profile & Info */}
             <div className="md:col-span-5 flex flex-col"> 
@@ -132,6 +124,22 @@ export default function NakulPortfolio() {
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae eros quis magna varius condimentum. 
                 Integer ac magna eget velit sagittis commodo eget vel nisi.
               </p>
+
+              {/* Polaroids Button */}
+              <button className="nav-link text-left w-fit mb-4">POLAROIDS</button>
+
+              {/* Social Links */}
+              <div className="flex space-x-4 mb-6">
+                <Link href="mailto:models@anonmodels.com" className="opacity-70 hover:opacity-100">
+                  <Mail size={20} />
+                </Link>
+                <Link href="https://www.instagram.com/anonmodels.in" target="_blank" className="opacity-70 hover:opacity-100">
+                  <Instagram size={20} />
+                </Link>
+                <Link href="https://www.linkedin.com/company/anon-models-llp" target="_blank" className="opacity-70 hover:opacity-100">
+                   <Linkedin size={20} />
+                </Link>
+              </div>
 
               {/* measurements */}
               <div className="grid grid-cols-3 -gap-y-1 text-xs">
@@ -158,16 +166,16 @@ export default function NakulPortfolio() {
               </div>
             </div>
 
-            {/* Profile Image - Respecting original aspect ratio */}
-            <div className="md:col-span-6 relative w-full cursor-pointer" style={heroAspectRatioStyle}> 
-              {imageDimensions[HERO_IMAGE] && ( // Render only when dimensions are loaded
+            {/* Profile Image */}
+            <div className="md:col-span-7 relative w-full cursor-pointer" style={heroAspectRatioStyle}>
+              {imageDimensions[HERO_IMAGE] && (
                 <Image
                   src={HERO_IMAGE}
                   alt="Nithin/Spidey portrait"
                   fill
                   className="object-cover object-center"
                   onClick={() => openLightbox([HERO_IMAGE], 0, 'profile')}
-                  priority // Prioritize loading the hero image
+                  priority
                 />
               )}
             </div>
@@ -175,14 +183,13 @@ export default function NakulPortfolio() {
         </div>
       </section>
 
-      {/* Work Profile Section Label */}
+      {/* "All Work" Section Label */}
       <div id="portfolio" className="container mx-auto px-4 md:px-8 py-8 scroll-mt-16">
-        <h2 className="text-lg uppercase tracking-wide">WORK PROFILE</h2>
-        <Separator className="mt-2" />
+        <h2 className="text-lg font-sans font-bold uppercase">ALL WORK</h2>
       </div>
 
       {/* Image Gallery - Full Bleed Responsive CSS Columns */}
-      <section className="w-full px-1"> {/* Slight padding for visual safety */}
+      <section className="w-full px-1">
         <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-2"> 
           {portfolioImages.map((src, i) => {
             if (!imageDimensions[src]) {
@@ -194,10 +201,10 @@ export default function NakulPortfolio() {
             return (
               <div 
                 key={`portfolio-${i}-${src.substring(src.lastIndexOf('/') + 1)}`}
-                className={`relative mb-2 cursor-pointer overflow-hidden`} // Removed colSpan, added mb-2 for column gap visual 
+                className={`relative mb-2 cursor-pointer overflow-hidden`}
                 style={{ 
                   aspectRatio: `${dims.width} / ${dims.height}`,
-                  breakInside: 'avoid' // Prevent items breaking across columns
+                  breakInside: 'avoid'
                 }}
               >
                 <Image
@@ -207,7 +214,7 @@ export default function NakulPortfolio() {
                   sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
                   className="object-cover"
                   onClick={() => openLightbox(portfolioImages, i, 'portfolio')}
-                  loading="lazy" // Lazy load gallery images
+                  loading="lazy"
                 />
               </div>
             );
@@ -215,35 +222,19 @@ export default function NakulPortfolio() {
         </div>
       </section>
 
-      {/* Footer - Constrained Width & Increased Top Margin */}
-      <footer className="mt-24 bg-white py-8 border-t"> {/* Increased top margin */} 
+      {/* Footer - Thinner */}
+      <footer className="mt-24 bg-white py-4 border-t">
         <div className="container mx-auto px-4 md:px-8">
-          <div className="max-w-xl mx-auto"> {/* Constrained width container */} 
+          <div className="max-w-xl mx-auto">
             <div className="flex flex-wrap justify-center gap-6">
-              {/* Social Icons Filtered */}
               <Link href="mailto:models@anonmodels.com" className="opacity-70 hover:opacity-100">
-                <Image
-                  src="https://ext.same-assets.com/2891512280/3316129701.webp"
-                  alt="Email"
-                  width={24}
-                  height={24}
-                />
+                 <Mail size={24} />
               </Link>
               <Link href="https://www.instagram.com/anonmodels.in" target="_blank" className="opacity-70 hover:opacity-100">
-                <Image
-                  src="https://ext.same-assets.com/2891512280/415325346.png"
-                  alt="Instagram"
-                  width={24}
-                  height={24}
-                />
+                <Instagram size={24} />
               </Link>
               <Link href="https://www.linkedin.com/company/anon-models-llp" target="_blank" className="opacity-70 hover:opacity-100">
-                <Image
-                  src="https://ext.same-assets.com/2891512280/2761650577.webp"
-                  alt="LinkedIn"
-                  width={24}
-                  height={24}
-                />
+                <Linkedin size={24} />
               </Link>
             </div>
           </div>
