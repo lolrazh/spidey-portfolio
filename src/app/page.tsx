@@ -9,7 +9,8 @@ import Lightbox from "@/components/lightbox";
 // Hero image path - to exclude from portfolio
 const HERO_IMAGE = "/PSP06449.jpg";
 
-// We'll use these images from the public folder
+// Dynamically list all images from the public directory (needs manual update if not server-rendered)
+// Ensure this list is updated if images in /public change
 const allImages = [
   "/DSC06002.jpg",
   "/DSC06700.jpg",
@@ -25,7 +26,7 @@ const allImages = [
   "/PSP06562.jpg",
   "/PSP06450.jpg",
   "/PSP06444.jpg",
-  "/PSP06449.jpg",
+  "/PSP06449.jpg", // Hero image, will be filtered out
   "/IMG-20250414-WA0005.jpg",
   "/IMG-20250414-WA0006.jpg",
   "/IMG-20250414-WA0007.jpg",
@@ -35,43 +36,56 @@ const allImages = [
 // Filter out the hero image
 const portfolioImages = allImages.filter(img => img !== HERO_IMAGE);
 
+// Type for storing dimensions
+type ImageDimensions = { width: number; height: number };
+
 export default function NakulPortfolio() {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxImages, setLightboxImages] = useState<string[]>([]);
   const [lightboxIndex, setLightboxIndex] = useState(0);
   const [galleryType, setGalleryType] = useState('portfolio');
-  const [imageAspectRatios, setImageAspectRatios] = useState<{[key: string]: number}>({});
+  const [imageDimensions, setImageDimensions] = useState<{ [key: string]: ImageDimensions }>({});
 
   useEffect(() => {
-    // Function to load image and calculate aspect ratio
-    const calculateAspectRatio = async (src: string) => {
-      return new Promise<number>((resolve) => {
+    // Function to load image and get dimensions
+    const getMeta = (url: string): Promise<ImageDimensions> => {
+      return new Promise((resolve, reject) => {
         const img = new window.Image();
-        img.onload = () => {
-          resolve(img.width / img.height);
-        };
-        img.src = src;
+        img.onload = () => resolve({ width: img.width, height: img.height });
+        img.onerror = (err) => reject(err);
+        img.src = url;
       });
     };
 
-    // Calculate aspect ratios for all portfolio images
-    const loadAspectRatios = async () => {
-      const ratios: {[key: string]: number} = {};
-      
-      for (const src of portfolioImages) {
+    // Calculate dimensions for all images (including hero)
+    const loadAllImageDimensions = async () => {
+      const dimensions: { [key: string]: ImageDimensions } = {};
+      for (const src of allImages) { // Load dimensions for ALL images
         try {
-          ratios[src] = await calculateAspectRatio(src);
+          dimensions[src] = await getMeta(src);
         } catch (error) {
-          console.error(`Error loading image ${src}:`, error);
-          ratios[src] = 0.75; // Default to portrait aspect ratio
+          console.error(`Failed to load dimensions for ${src}:`, error);
+          // Provide a default fallback dimension if loading fails
+          dimensions[src] = { width: 3, height: 4 }; 
         }
       }
-      
-      setImageAspectRatios(ratios);
+      setImageDimensions(dimensions);
     };
 
-    loadAspectRatios();
-  }, []);
+    loadAllImageDimensions();
+  }, []); // Run only once on mount
+
+  // Helper function to get dimensions or fallback
+  const getDimensions = (src: string): ImageDimensions => {
+    return imageDimensions[src] || { width: 3, height: 4 }; // Default portrait before loaded
+  };
+
+  // Helper function to check orientation
+  const isLandscape = (src: string): boolean => {
+    const dims = getDimensions(src);
+    // Consider square as portrait for layout purposes, or adjust as needed
+    return dims.width > dims.height; 
+  };
 
   const openLightbox = (images: string[], index: number, type: string) => {
     setLightboxImages(images);
@@ -80,10 +94,10 @@ export default function NakulPortfolio() {
     setLightboxOpen(true);
   };
 
-  const isLandscape = (src: string) => {
-    const ratio = imageAspectRatios[src] || 0.75;
-    return ratio >= 1;
-  };
+  const heroDimensions = getDimensions(HERO_IMAGE);
+  const heroAspectRatioStyle = imageDimensions[HERO_IMAGE]
+    ? { aspectRatio: `${heroDimensions.width} / ${heroDimensions.height}` }
+    : { paddingTop: '125%'}; // Fallback aspect ratio (e.g., 4:5 portrait)
 
   return (
     <main className="min-h-screen flex flex-col">
@@ -106,11 +120,11 @@ export default function NakulPortfolio() {
         </div>
       </header>
 
-      {/* Main Content - Hero Section */}
+      {/* Main Content - Hero Section (Smaller Image) */}
       <section id="about" className="container mx-auto py-12 md:py-16 px-4 md:px-8 scroll-mt-16">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12">
-          {/* Left column - Profile & Info */}
-          <div className="md:col-span-3 flex flex-col">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-start">
+          {/* Left column - Profile & Info (Wider) */}
+          <div className="md:col-span-5 flex flex-col"> {/* Increased span */}
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-medium font-cormorant tracking-tight mb-4 uppercase">NITHIN/<br />SPIDEY</h1>
 
             <p className="text-sm mb-6 mt-2">
@@ -143,15 +157,18 @@ export default function NakulPortfolio() {
             </div>
           </div>
 
-          {/* Profile Image */}
-          <div className="md:col-span-9 relative h-[600px] md:h-[700px] cursor-pointer">
-            <Image
-              src={HERO_IMAGE}
-              alt="Nithin/Spidey portrait"
-              fill
-              className="object-cover object-center"
-              onClick={() => openLightbox([HERO_IMAGE], 0, 'profile')}
-            />
+          {/* Profile Image (Smaller) - Respecting original aspect ratio */}
+          <div className="md:col-span-7 relative w-full cursor-pointer" style={heroAspectRatioStyle}> {/* Decreased span */}
+            {imageDimensions[HERO_IMAGE] && ( // Render only when dimensions are loaded
+              <Image
+                src={HERO_IMAGE}
+                alt="Nithin/Spidey portrait"
+                fill
+                className="object-cover object-center"
+                onClick={() => openLightbox([HERO_IMAGE], 0, 'profile')}
+                priority // Prioritize loading the hero image
+              />
+            )}
           </div>
         </div>
       </section>
@@ -162,25 +179,35 @@ export default function NakulPortfolio() {
         <Separator className="mt-2" />
       </div>
 
-      {/* Image Gallery - Masonry grid with original aspect ratios */}
-      <section className="container mx-auto px-4 md:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
+      {/* Image Gallery - Full Width Responsive Masonry Grid */}
+      <section className="w-full px-4 md:px-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {portfolioImages.map((src, i) => {
-            // Set column span based on aspect ratio
-            const colSpan = isLandscape(src) ? "md:col-span-8" : "md:col-span-4";
-            const aspect = isLandscape(src) ? "aspect-[4/3]" : "aspect-[3/4]";
+            if (!imageDimensions[src]) {
+              // Optionally render a placeholder while dimensions load
+              return <div key={src} className="bg-gray-200 aspect-[3/4]"></div>; 
+            }
+            const landscape = isLandscape(src);
+            const dims = getDimensions(src);
+            // Adjust column span for landscape images across breakpoints
+            const colSpan = landscape 
+              ? "sm:col-span-2 md:col-span-2 lg:col-span-2" 
+              : "col-span-1";
             
             return (
               <div 
-                key={`portfolio-${i}-${src.substring(src.lastIndexOf('/') + 1, src.lastIndexOf('.'))}`}
-                className={`${colSpan} relative ${aspect} cursor-pointer overflow-hidden`}
+                key={`portfolio-${i}-${src.substring(src.lastIndexOf('/') + 1)}`}
+                className={`${colSpan} relative cursor-pointer overflow-hidden`}
+                style={{ aspectRatio: `${dims.width} / ${dims.height}` }}
               >
                 <Image
                   src={src}
                   alt={`Portfolio image ${i + 1}`}
                   fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
                   className="object-cover"
-                  onClick={() => openLightbox([src], 0, 'portfolio')}
+                  onClick={() => openLightbox(portfolioImages, i, 'portfolio')}
+                  loading="lazy" // Lazy load gallery images
                 />
               </div>
             );
@@ -188,10 +215,11 @@ export default function NakulPortfolio() {
         </div>
       </section>
 
-      {/* Footer */}
+      {/* Footer - Icons only */}
       <footer className="mt-auto bg-white py-8 border-t mt-16">
         <div className="container mx-auto px-4 md:px-8">
           <div className="flex flex-wrap justify-center gap-6">
+            {/* Social Icons Only */}
             <Link href="https://www.behance.net/anonmodels" target="_blank" className="opacity-70 hover:opacity-100">
               <Image
                 src="https://ext.same-assets.com/2891512280/3091884418.png"
@@ -257,16 +285,7 @@ export default function NakulPortfolio() {
               />
             </Link>
           </div>
-
-          <div className="mt-8 flex flex-wrap justify-center gap-6 text-sm">
-            <a href="#about" className="text-gray-600 hover:text-black">ABOUT</a>
-            <a href="#portfolio" className="text-gray-600 hover:text-black">PORTFOLIO</a>
-            <Link href="https://www.anonmodels.com" className="text-gray-600 hover:text-black">HOME</Link>
-            <Link href="https://www.anonmodels.com/delhi" className="text-gray-600 hover:text-black">DELHI</Link>
-            <Link href="https://www.anonmodels.com/copy-of-delhi" className="text-gray-600 hover:text-black">MUMBAI</Link>
-            <Link href="https://www.anonmodels.com/aboutanon" className="text-gray-600 hover:text-black">ABOUT ANON</Link>
-            <Link href="https://www.anonmodels.com/joinanon" className="text-gray-600 hover:text-black">JOIN ANON</Link>
-          </div>
+          {/* Removed text links div */}
         </div>
       </footer>
 
@@ -274,7 +293,7 @@ export default function NakulPortfolio() {
       <Lightbox
         isOpen={lightboxOpen}
         onClose={() => setLightboxOpen(false)}
-        images={lightboxImages}
+        images={portfolioImages}
         currentIndex={lightboxIndex}
         galleryType={galleryType}
       />

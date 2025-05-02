@@ -10,3 +10,7 @@
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
+  
+[[plugins]]
+  package = "netlify-plugin-image-optimizer"
+  inputs = { include = ["public/images/**/*.{jpg,jpeg,png,webp}"] }
