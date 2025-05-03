@@ -172,8 +172,8 @@ export default function SpideyPortfolio() {
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-medium font-cormorant tracking-tight mb-4 uppercase">NITHIN/SPIDEY</h1>
   
               <p className="text-sm mb-4 mt-2">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae eros quis magna varius condimentum. 
-                Integer ac magna eget velit sagittis commodo eget vel nisi.
+              Hi, I'm Spidey! I'm an architect-turned-model. 
+              I bring creativity, energy, and flawless style to every shoot. Want to work together? <br></br> Let's make something cool happen!
               </p>
 
               {/* Buttons and Socials Row */}
@@ -188,7 +188,7 @@ export default function SpideyPortfolio() {
 
                 {/* Social Links (Styled like Nav Links) */}
                 <div className="flex space-x-6"> 
-                  <Link href="mailto:models@anonmodels.com" className="text-current hover:opacity-70 transition-opacity duration-200"> {/* Apply hover opacity */} 
+                  <Link href="mailto:spideyos@yahoo.com" className="text-current hover:opacity-70 transition-opacity duration-200"> {/* Apply hover opacity */} 
                     <Mail size={20} strokeWidth={1.0} /> 
                   </Link>
                   <Link href="https://www.instagram.com/spideyos" target="_blank" className="text-current hover:opacity-70 transition-opacity duration-200"> {/* Apply hover opacity */} 
@@ -303,7 +303,7 @@ export default function SpideyPortfolio() {
           <div className="max-w-xl mx-auto">
             <div className="flex flex-wrap justify-center gap-6">
               {/* Social Icons Filtered (Styled like Nav Links) */}
-              <Link href="mailto:models@anonmodels.com" className="text-current hover:opacity-70 transition-opacity duration-200"> {/* Apply hover opacity */} 
+              <Link href="mailto:spideyos@yahoo.com" className="text-current hover:opacity-70 transition-opacity duration-200"> {/* Apply hover opacity */} 
                  <Mail size={20} strokeWidth={1.0}/> 
               </Link>
               <Link href="https://www.instagram.com/spideyos" target="_blank" className="text-current hover:opacity-70 transition-opacity duration-200"> {/* Apply hover opacity */} 
