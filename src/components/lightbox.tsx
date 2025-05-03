@@ -70,10 +70,14 @@ export default function Lightbox({
       className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4 backdrop-blur-sm"
       onClick={onClose}
     >
-      <div className="absolute top-4 left-1/2 -translate-x-1/2 z-[120] text-white text-sm font-mono">
-        {index + 1} / {images.length}
-      </div>
+      {/* Counter (Top Center - Conditional) */}
+      {images.length > 1 && ( // Only show if more than 1 image
+        <div className="absolute top-4 left-1/2 -translate-x-1/2 z-[120] text-white text-sm font-mono"> 
+          {index + 1} / {images.length}
+        </div>
+      )} 
       
+      {/* Close button */}
       <button
         onClick={(e) => { e.stopPropagation(); onClose(); }}
         className="absolute top-4 right-4 z-[120] p-2 text-white hover:opacity-70 transition-opacity"
@@ -82,27 +86,32 @@ export default function Lightbox({
         <X size={28} />
       </button>
 
-      <button
-        onClick={(e) => {
-          e.stopPropagation();
-          setIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : images.length - 1));
-        }}
-        className="absolute left-4 top-1/2 -translate-y-1/2 z-[110] p-2 text-white hover:opacity-70 transition-opacity"
-        aria-label="Previous image"
-      >
-        <ChevronLeft size={32} />
-      </button>
+      {/* Navigation buttons (Conditional) */}
+      {images.length > 1 && ( // Only show if more than 1 image
+        <>
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              setIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : images.length - 1));
+            }}
+            className="absolute left-4 top-1/2 -translate-y-1/2 z-[110] p-2 text-white hover:opacity-70 transition-opacity"
+            aria-label="Previous image"
+          >
+            <ChevronLeft size={32} />
+          </button>
 
-      <button
-        onClick={(e) => {
-          e.stopPropagation();
-          setIndex((prevIndex) => (prevIndex < images.length - 1 ? prevIndex + 1 : 0));
-        }}
-        className="absolute right-4 top-1/2 -translate-y-1/2 z-[110] p-2 text-white hover:opacity-70 transition-opacity"
-        aria-label="Next image"
-      >
-        <ChevronRight size={32} />
-      </button>
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              setIndex((prevIndex) => (prevIndex < images.length - 1 ? prevIndex + 1 : 0));
+            }}
+            className="absolute right-4 top-1/2 -translate-y-1/2 z-[110] p-2 text-white hover:opacity-70 transition-opacity"
+            aria-label="Next image"
+          >
+            <ChevronRight size={32} />
+          </button>
+        </>
+      )}
 
       <div
         className="relative h-[90vh] w-full max-w-screen-lg flex items-center justify-center" 

@@ -16,7 +16,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "NITHIN/SPIDEY | Model",
+  title: "NITHIN/SPIDEY | model",
   description: "Model portfolio for Nithin/Spidey",
 };
 
