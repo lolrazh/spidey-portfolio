@@ -155,8 +155,8 @@ export default function NakulPortfolio() {
 
               {/* Buttons and Socials Row */}
               <div className="flex items-center space-x-8 mt-4 mb-8">
-                {/* Polaroids Button (Styled as Nav Link) */}
-                <button className="font-sans text-sm uppercase tracking-wider hover:opacity-70 transition-opacity duration-200">
+                {/* Polaroids Button (Border + Nav Link Hover) */}
+                <button className="font-sans text-sm uppercase tracking-wider border border-current px-3 py-1 hover:opacity-70 transition-opacity duration-200">
                   POLAROIDS
                 </button>
 
@@ -199,15 +199,14 @@ export default function NakulPortfolio() {
               </div>
             </div>
 
-            {/* Profile Image */}
-            <div className="md:col-span-5 relative w-full cursor-pointer" style={heroAspectRatioStyle}>
+            {/* Profile Image (Lightbox disabled) */}
+            <div className="md:col-span-6 relative w-full cursor-default" style={heroAspectRatioStyle}>
               {imageDimensions[HERO_IMAGE] && ( 
                 <Image
                   src={HERO_IMAGE}
                   alt="Nithin/Spidey portrait"
                   fill
                   className="object-cover object-center"
-                  onClick={() => openLightbox([HERO_IMAGE], 0, 'profile')}
                   priority 
                 />
               )}
