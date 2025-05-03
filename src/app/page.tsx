@@ -7,6 +7,7 @@ import { Separator } from "@/components/ui/separator";
 import Lightbox from "@/components/lightbox";
 import { Mail, Instagram, Linkedin } from 'lucide-react';
 import path from 'path';
+import { motion } from 'framer-motion';
 
 // Hero image base name (without extension)
 const HERO_IMAGE_BASENAME = "PSP06449"; // Example, adjust if filename changes
@@ -92,6 +93,23 @@ export default function NakulPortfolio() {
     setLightboxOpen(true);
   };
 
+  // Smooth scroll handler
+  const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>, targetId: string) => {
+    e.preventDefault();
+    const targetElement = document.getElementById(targetId);
+    if (targetElement) {
+      // Calculate position considering potential sticky header offset
+      const headerOffset = 80; // Adjust based on your actual header height + desired gap
+      const elementPosition = targetElement.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.scrollY - headerOffset;
+      
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
+    }
+  };
+
   // Define sizes prop for images (adjust based on your column layout)
   const imageSizes = "(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw";
 
@@ -101,8 +119,18 @@ export default function NakulPortfolio() {
       <header className={`py-4 border-b sticky top-0 bg-white z-50 transition-transform duration-300 ${showHeader ? 'translate-y-0' : '-translate-y-full'}`}>
         <div className="container mx-auto flex justify-center items-center px-4 md:px-8"> 
           <nav className="flex space-x-8">
-            <a href="#about" className="nav-link">ABOUT</a>
-            <a href="#portfolio" className="nav-link">ALL WORK</a>
+            <a 
+              href="#about" 
+              className="nav-link" 
+              onClick={(e) => handleSmoothScroll(e, 'about')} >
+              ABOUT
+            </a>
+            <a 
+              href="#portfolio" 
+              className="nav-link" 
+              onClick={(e) => handleSmoothScroll(e, 'portfolio')} >
+              ALL WORK
+            </a>
           </nav>
         </div>
       </header>
@@ -112,7 +140,7 @@ export default function NakulPortfolio() {
         <div className="max-w-5xl mx-auto"> 
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-start">
             {/* Left column - Profile & Info */}
-            <div className="md:col-span-6 flex flex-col">
+            <div className="md:col-span-7 flex flex-col">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-medium font-cormorant tracking-tight mb-4 uppercase">NITHIN/SPIDEY</h1>
   
               <p className="text-sm mb-4 mt-2">
@@ -122,21 +150,21 @@ export default function NakulPortfolio() {
 
               {/* Buttons and Socials Row */}
               <div className="flex items-center space-x-8 mt-4 mb-8">
-                {/* Polaroids Button (Border + Nav Link Hover) */}
+                {/* Polaroids Button */}
                 <button className="font-sans text-sm uppercase tracking-wider border border-current px-3 py-1 hover:opacity-70 transition-opacity duration-200">
                   POLAROIDS
                 </button>
 
-                {/* Social Links (Thinner stroke, more space) */}
-                <div className="flex space-x-6">
-                  <Link href="mailto:models@anonmodels.com" className="opacity-70 hover:opacity-100">
-                    <Mail size={20} strokeWidth={1.5} />
+                {/* Social Links (Styled like Nav Links) */}
+                <div className="flex space-x-6"> 
+                  <Link href="mailto:models@anonmodels.com" className="text-current hover:opacity-70 transition-opacity duration-200"> {/* Apply hover opacity */} 
+                    <Mail size={20} strokeWidth={1.0} /> 
                   </Link>
-                  <Link href="https://www.instagram.com/anonmodels.in" target="_blank" className="opacity-70 hover:opacity-100">
-                    <Instagram size={20} strokeWidth={1.5} />
+                  <Link href="https://www.instagram.com/anonmodels.in" target="_blank" className="text-current hover:opacity-70 transition-opacity duration-200"> {/* Apply hover opacity */} 
+                    <Instagram size={20} strokeWidth={1.0} /> 
                   </Link>
-                  <Link href="https://www.linkedin.com/company/anon-models-llp" target="_blank" className="opacity-70 hover:opacity-100">
-                    <Linkedin size={20} strokeWidth={1.5} />
+                  <Link href="https://www.linkedin.com/company/anon-models-llp" target="_blank" className="text-current hover:opacity-70 transition-opacity duration-200"> {/* Apply hover opacity */} 
+                    <Linkedin size={20} strokeWidth={1.0} /> 
                   </Link>
                 </div>
               </div>
@@ -239,14 +267,15 @@ export default function NakulPortfolio() {
         <div className="container mx-auto px-4 md:px-8">
           <div className="max-w-xl mx-auto">
             <div className="flex flex-wrap justify-center gap-6">
-              <Link href="mailto:models@anonmodels.com" className="opacity-70 hover:opacity-100">
-                 <Mail size={20} strokeWidth={1.5}/>
+              {/* Social Icons Filtered (Styled like Nav Links) */}
+              <Link href="mailto:models@anonmodels.com" className="text-current hover:opacity-70 transition-opacity duration-200"> {/* Apply hover opacity */} 
+                 <Mail size={20} strokeWidth={1.0}/> 
               </Link>
-              <Link href="https://www.instagram.com/anonmodels.in" target="_blank" className="opacity-70 hover:opacity-100">
-                <Instagram size={20} strokeWidth={1.5}/>
+              <Link href="https://www.instagram.com/anonmodels.in" target="_blank" className="text-current hover:opacity-70 transition-opacity duration-200"> {/* Apply hover opacity */} 
+                <Instagram size={20} strokeWidth={1.0}/> 
               </Link>
-              <Link href="https://www.linkedin.com/company/anon-models-llp" target="_blank" className="opacity-70 hover:opacity-100">
-                <Linkedin size={20} strokeWidth={1.5}/>
+              <Link href="https://www.linkedin.com/company/anon-models-llp" target="_blank" className="text-current hover:opacity-70 transition-opacity duration-200"> {/* Apply hover opacity */} 
+                <Linkedin size={20} strokeWidth={1.0}/> 
               </Link>
             </div>
           </div>
