@@ -4,10 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev -H 0.0.0.0 --turbopack",
-    "build": "next build",
+    "build": "node scripts/optimize-images.mjs && next build && next export",
     "start": "next start",
     "lint": "bunx biome lint --write && bunx tsc --noEmit",
-    "format": "bunx biome format --write"
+    "format": "bunx biome format --write",
+    "export": "next export"
   },
   "dependencies": {
     "@netlify/plugin-nextjs": "^5.10.7",
@@ -31,7 +32,10 @@
     "@types/react-dom": "^18.3.5",
     "eslint": "^9",
     "eslint-config-next": "15.1.7",
+    "fs-extra": "^11.3.0",
+    "glob": "^11.0.2",
     "postcss": "^8",
+    "sharp": "^0.34.1",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
   }

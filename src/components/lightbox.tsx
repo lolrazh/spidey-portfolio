@@ -9,10 +9,10 @@ type ImageDimensions = { width: number; height: number };
 interface LightboxProps {
   isOpen: boolean;
   onClose: () => void;
-  images: string[];
+  images: string[]; // Should be paths to reasonably sized optimized images (e.g., 1200w webp)
   currentIndex: number;
-  galleryType: string;
-  imageDimensions: { [key: string]: ImageDimensions }; // Accept dimensions object
+  // galleryType: string; // Removed if not needed
+  // imageDimensions: { [key: string]: ImageDimensions }; // Removed, dimensions are implicit in the optimized image
 }
 
 export default function Lightbox({ 
@@ -20,8 +20,8 @@ export default function Lightbox({
   onClose, 
   images, 
   currentIndex, 
-  galleryType, 
-  imageDimensions // Destructure new prop
+  // galleryType, // Removed
+  // imageDimensions // Removed
 }: LightboxProps) {
   const [index, setIndex] = useState(currentIndex);
 
@@ -62,9 +62,8 @@ export default function Lightbox({
 
   if (!isOpen || images.length === 0) return null;
 
-  // Get dimensions for the current image
+  // No need to get dimensions here anymore
   const currentImageSrc = images[index];
-  const currentDimensions = imageDimensions[currentImageSrc] || { width: 800, height: 1000 }; // Fallback dimensions
 
   return (
     <div
@@ -106,18 +105,15 @@ export default function Lightbox({
       </button>
 
       <div
-        className="relative h-[90vh] w-full max-w-screen-lg flex items-center justify-center"
-        onClick={(e) => e.stopPropagation()}
+        className="relative h-[90vh] w-full max-w-screen-lg flex items-center justify-center" 
+        onClick={(e) => e.stopPropagation()} 
       >
-        <Image
-          key={currentImageSrc}
+        <img
+          key={currentImageSrc} 
           src={currentImageSrc}
           alt={`Image ${index + 1}`}
-          width={currentDimensions.width}
-          height={currentDimensions.height}
-          className="object-contain max-h-[90vh] max-w-[90vw] w-auto h-auto"
-          priority={index === currentIndex}
-          unoptimized
+          className="object-contain max-h-[90vh] max-w-[90vw] w-auto h-auto block"
+          loading="eager"
         />
       </div>
     </div>

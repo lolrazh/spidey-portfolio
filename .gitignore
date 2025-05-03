@@ -39,3 +39,14 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Generated assets
+/public/optimized-images/
+
+# Next.js build output
+/out/
+
+# Other common ignores
+.DS_Store
+*.env.local
+*.env*.backup
