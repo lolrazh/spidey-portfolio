@@ -70,7 +70,7 @@ export default function Lightbox({
       className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4 backdrop-blur-sm"
       onClick={onClose}
     >
-      <div className="absolute top-4 left-4 z-[120] text-white text-sm font-mono">
+      <div className="absolute top-4 left-1/2 -translate-x-1/2 z-[120] text-white text-sm font-mono">
         {index + 1} / {images.length}
       </div>
       

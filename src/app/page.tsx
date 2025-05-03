@@ -140,7 +140,7 @@ export default function NakulPortfolio() {
         <div className="max-w-5xl mx-auto"> 
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-start">
             {/* Left column - Profile & Info */}
-            <div className="md:col-span-7 flex flex-col">
+            <div className="md:col-span-6 flex flex-col">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-medium font-cormorant tracking-tight mb-4 uppercase">NITHIN/SPIDEY</h1>
   
               <p className="text-sm mb-4 mt-2">
