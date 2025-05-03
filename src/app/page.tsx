@@ -3,11 +3,10 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Separator } from "@/components/ui/separator";
 import Lightbox from "@/components/lightbox";
 import { Mail, Instagram, Linkedin } from 'lucide-react';
 import path from 'path';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 // Hero image base name (without extension)
 const HERO_IMAGE_BASENAME = "PSP06449"; // Example, adjust if filename changes
