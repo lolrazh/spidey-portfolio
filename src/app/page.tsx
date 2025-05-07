@@ -10,7 +10,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 // Image basenames (without extension)
 const HERO_IMAGE_BASENAME = "PSP06449";
-const POLAROID_IMAGE_BASENAME = "short_hair_compcard"; // Added polaroid basename
+const POLAROID_IMAGE_BASENAME = "short_hair_compcard_2"; // Added polaroid basename
 
 // List of ALL BASE image filenames from src/assets/images
 const allImageBasenames = [
@@ -35,7 +35,7 @@ const allImageBasenames = [
   "IMG-20250414-WA0006",
   "IMG-20250414-WA0007",
   "IMG-20250414-WA0008",
-  "short_hair_compcard", // Added polaroid here
+  "short_hair_compcard_2", // Added polaroid here
 ];
 
 // Images to exclude from the main portfolio gallery
