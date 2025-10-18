@@ -1,36 +1,37 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+This project uses [Next.js](https://nextjs.org) with the App Router and Tailwind CSS.
 
-## Getting Started
+## Managing images (Netlify CMS)
 
-First, run the development server:
+The site ships with a friendly content manager powered by [Netlify CMS (Decap CMS)](https://decapcms.org/). Non-technical editors can log in at `/admin` and update the hero, polaroids, and masonry gallery without touching code.
+
+### One-time Netlify setup
+
+1. In your Netlify site dashboard, enable **Identity**.
+2. Invite anyone who should manage images (they will confirm via email).
+3. In **Identity → Services**, enable **Git Gateway** so the CMS can commit changes back to the repository.
+
+### Uploading & organizing photos
+
+1. Visit `https://<your-site>/admin` and log in with the Netlify Identity account.
+2. Open the **Gallery** entry.
+3. Use the **Images** list to upload new photos, set their accessibility-friendly alt text, and choose whether they appear in the main gallery (leave hero/polaroid images unchecked to hide duplicates).
+4. Drag items by the handle on the left to reorder how they appear on the page.
+5. Select the **Hero Image** and **Polaroid Image** fields to control the primary photos in the about section and lightbox button.
+6. Click **Publish**. The CMS commits your updates to the repo, triggering a fresh Netlify build.
+
+During each build, the `npm run build` script runs `scripts/optimize-images.mjs` to regenerate the responsive `public/optimized-images` assets used by the front-end.
+
+### Editing locally
+
+Content editors working in code can modify `src/content/gallery.json` directly. Run `npm run build` (or `npm run dev` for live reloading) to regenerate optimized image assets.
+
+## Getting Started (development)
+
+Install dependencies and run the dev server:
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Open [http://localhost:3000](http://localhost:3000) to preview the site. Changes to files inside `src` hot-reload automatically.
