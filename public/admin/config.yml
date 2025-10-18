@@ -1,0 +1,41 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "public/uploads"
+public_folder: "/uploads"
+
+publish_mode: editorial_workflow
+
+collections:
+  - label: "Gallery"
+    name: "gallery"
+    files:
+      - label: "Site Images"
+        name: "siteImages"
+        file: "src/content/gallery.json"
+        format: "json"
+        fields:
+          - label: "Hero Image"
+            name: "hero"
+            widget: "object"
+            fields:
+              - { label: "Image", name: "image", widget: "image" }
+              - { label: "Alt Text", name: "alt", widget: "string", required: false }
+              - { label: "Lightbox Image", name: "lightboxImage", widget: "image", required: false, hint: "Optional higher resolution version." }
+          - label: "Polaroid"
+            name: "polaroid"
+            widget: "object"
+            fields:
+              - { label: "Image", name: "image", widget: "image" }
+              - { label: "Alt Text", name: "alt", widget: "string", required: false }
+              - { label: "Lightbox Image", name: "lightboxImage", widget: "image", required: false }
+          - label: "Portfolio"
+            name: "portfolio"
+            widget: "list"
+            summary: '{{fields.alt | default(value="Portfolio image")}}'
+            allow_add: true
+            fields:
+              - { label: "Image", name: "image", widget: "image" }
+              - { label: "Lightbox Image", name: "lightboxImage", widget: "image", required: false }
+              - { label: "Alt Text", name: "alt", widget: "string", required: false }

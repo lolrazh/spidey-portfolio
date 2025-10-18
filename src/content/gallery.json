@@ -1,0 +1,114 @@
+{
+  "hero": {
+    "image": "/uploads/PSP06449.jpg",
+    "alt": "Nithin/Spidey portrait",
+    "lightboxImage": "/uploads/PSP06449.jpg"
+  },
+  "polaroid": {
+    "image": "/uploads/short_hair_compcard_2.jpg",
+    "alt": "Spidey polaroid",
+    "lightboxImage": "/uploads/short_hair_compcard_2.jpg"
+  },
+  "portfolio": [
+    {
+      "image": "/uploads/DSC06002.jpg",
+      "lightboxImage": "/uploads/DSC06002.jpg",
+      "alt": "Portfolio image 1"
+    },
+    {
+      "image": "/uploads/DSC06700.jpg",
+      "lightboxImage": "/uploads/DSC06700.jpg",
+      "alt": "Portfolio image 2"
+    },
+    {
+      "image": "/uploads/DSC05908.jpg",
+      "lightboxImage": "/uploads/DSC05908.jpg",
+      "alt": "Portfolio image 3"
+    },
+    {
+      "image": "/uploads/DSC05764.jpg",
+      "lightboxImage": "/uploads/DSC05764.jpg",
+      "alt": "Portfolio image 4"
+    },
+    {
+      "image": "/uploads/PSP06633.jpg",
+      "lightboxImage": "/uploads/PSP06633.jpg",
+      "alt": "Portfolio image 5"
+    },
+    {
+      "image": "/uploads/PSP06518.jpg",
+      "lightboxImage": "/uploads/PSP06518.jpg",
+      "alt": "Portfolio image 6"
+    },
+    {
+      "image": "/uploads/PSP06485.jpg",
+      "lightboxImage": "/uploads/PSP06485.jpg",
+      "alt": "Portfolio image 7"
+    },
+    {
+      "image": "/uploads/PSP06604.jpg",
+      "lightboxImage": "/uploads/PSP06604.jpg",
+      "alt": "Portfolio image 8"
+    },
+    {
+      "image": "/uploads/PSP06609.jpg",
+      "lightboxImage": "/uploads/PSP06609.jpg",
+      "alt": "Portfolio image 9"
+    },
+    {
+      "image": "/uploads/PSP06627.jpg",
+      "lightboxImage": "/uploads/PSP06627.jpg",
+      "alt": "Portfolio image 10"
+    },
+    {
+      "image": "/uploads/PSP06657.jpg",
+      "lightboxImage": "/uploads/PSP06657.jpg",
+      "alt": "Portfolio image 11"
+    },
+    {
+      "image": "/uploads/PSP06562.jpg",
+      "lightboxImage": "/uploads/PSP06562.jpg",
+      "alt": "Portfolio image 12"
+    },
+    {
+      "image": "/uploads/PSP06450.jpg",
+      "lightboxImage": "/uploads/PSP06450.jpg",
+      "alt": "Portfolio image 13"
+    },
+    {
+      "image": "/uploads/PSP06444.jpg",
+      "lightboxImage": "/uploads/PSP06444.jpg",
+      "alt": "Portfolio image 14"
+    },
+    {
+      "image": "/uploads/DSC06971.jpg",
+      "lightboxImage": "/uploads/DSC06971.jpg",
+      "alt": "Portfolio image 15"
+    },
+    {
+      "image": "/uploads/IMG_20240601_013652_478.jpg",
+      "lightboxImage": "/uploads/IMG_20240601_013652_478.jpg",
+      "alt": "Portfolio image 16"
+    },
+    {
+      "image": "/uploads/IMG-20250414-WA0005.jpg",
+      "lightboxImage": "/uploads/IMG-20250414-WA0005.jpg",
+      "alt": "Portfolio image 17"
+    },
+    {
+      "image": "/uploads/IMG-20250414-WA0006.jpg",
+      "lightboxImage": "/uploads/IMG-20250414-WA0006.jpg",
+      "alt": "Portfolio image 18"
+    },
+    {
+      "image": "/uploads/IMG-20250414-WA0007.jpg",
+      "lightboxImage": "/uploads/IMG-20250414-WA0007.jpg",
+      "alt": "Portfolio image 19"
+    },
+    {
+      "image": "/uploads/IMG-20250414-WA0008.jpg",
+      "lightboxImage": "/uploads/IMG-20250414-WA0008.jpg",
+      "alt": "Portfolio image 20"
+    }
+  ]
+}
