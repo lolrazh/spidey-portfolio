@@ -1,0 +1,98 @@
+{
+  "hero": {
+    "image": "uploads/PSP06449.jpg",
+    "alt": "Spidey posing in a denim jacket against a neutral backdrop"
+  },
+  "polaroids": [
+    {
+      "image": "uploads/short_hair_compcard_2.jpg",
+      "alt": "Polaroid portrait of Spidey in a white t-shirt"
+    },
+    {
+      "image": "uploads/short_hair_compcard.jpg",
+      "alt": "Full-body polaroid of Spidey wearing dark jeans"
+    }
+  ],
+  "gallery": [
+    {
+      "image": "uploads/DSC06002.jpg",
+      "alt": "Editorial shot of Spidey in a long coat"
+    },
+    {
+      "image": "uploads/DSC06700.jpg",
+      "alt": "Spidey posing outdoors between architectural columns"
+    },
+    {
+      "image": "uploads/DSC05908.jpg",
+      "alt": "Low-angle runway photograph of Spidey"
+    },
+    {
+      "image": "uploads/DSC05764.jpg",
+      "alt": "Spidey leaning on a railing in urban setting"
+    },
+    {
+      "image": "uploads/PSP06633.JPG",
+      "alt": "Studio portrait with dramatic side lighting"
+    },
+    {
+      "image": "uploads/PSP06518.JPG",
+      "alt": "Spidey seated on a stool wearing a leather jacket"
+    },
+    {
+      "image": "uploads/PSP06485.jpg",
+      "alt": "Smiling portrait of Spidey in casual wear"
+    },
+    {
+      "image": "uploads/PSP06604.JPG",
+      "alt": "Studio profile shot with warm lighting"
+    },
+    {
+      "image": "uploads/PSP06609.JPG",
+      "alt": "Editorial look featuring a patterned suit"
+    },
+    {
+      "image": "uploads/PSP06627.JPG",
+      "alt": "Close-up portrait highlighting Spidey's gaze"
+    },
+    {
+      "image": "uploads/PSP06657.JPG",
+      "alt": "Monochrome portrait with intense expression"
+    },
+    {
+      "image": "uploads/PSP06562.jpg",
+      "alt": "Spidey adjusting his jacket during a shoot"
+    },
+    {
+      "image": "uploads/PSP06450.jpg",
+      "alt": "Full-body shot of Spidey on a staircase"
+    },
+    {
+      "image": "uploads/PSP06444.jpg",
+      "alt": "Editorial pose against a textured wall"
+    },
+    {
+      "image": "uploads/DSC06971.jpg",
+      "alt": "Runway walk captured mid-stride"
+    },
+    {
+      "image": "uploads/IMG_20240601_013652_478.jpg",
+      "alt": "Backstage candid with dramatic lighting"
+    },
+    {
+      "image": "uploads/IMG-20250414-WA0005.jpg",
+      "alt": "Casual street-style look with sunglasses"
+    },
+    {
+      "image": "uploads/IMG-20250414-WA0006.jpg",
+      "alt": "Spidey leaning on a wall in soft daylight"
+    },
+    {
+      "image": "uploads/IMG-20250414-WA0007.jpg",
+      "alt": "Candid laughter shot in outdoor setting"
+    },
+    {
+      "image": "uploads/IMG-20250414-WA0008.jpg",
+      "alt": "Spidey posing on a bridge at sunset"
+    }
+  ]
+}

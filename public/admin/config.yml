@@ -1,0 +1,66 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "public/uploads"
+public_folder: "/uploads"
+
+site_url: ""
+logo_url: ""
+
+collections:
+  - label: "Site Content"
+    name: "content"
+    editor:
+      preview: false
+    files:
+      - label: "Image Collections"
+        name: "gallery"
+        file: "src/content/gallery.json"
+        format: "json"
+        fields:
+          - label: "Hero Image"
+            name: "hero"
+            widget: "object"
+            collapsed: false
+            summary: "Hero"
+            fields:
+              - label: "Image"
+                name: "image"
+                widget: "image"
+                allow_multiple: false
+                choose_url: false
+              - label: "Alt Text"
+                name: "alt"
+                widget: "string"
+                required: false
+                hint: "Describe the image for accessibility."
+          - label: "Polaroids"
+            name: "polaroids"
+            widget: "list"
+            summary: "{{fields.alt | default('Polaroid image')}}"
+            fields:
+              - label: "Image"
+                name: "image"
+                widget: "image"
+                allow_multiple: false
+                choose_url: false
+              - label: "Alt Text"
+                name: "alt"
+                widget: "string"
+                required: false
+          - label: "Gallery Images"
+            name: "gallery"
+            widget: "list"
+            summary: "{{fields.alt | default('Gallery image')}}"
+            fields:
+              - label: "Image"
+                name: "image"
+                widget: "image"
+                allow_multiple: false
+                choose_url: false
+              - label: "Alt Text"
+                name: "alt"
+                widget: "string"
+                required: false
+                hint: "Optional description shown to screen readers."

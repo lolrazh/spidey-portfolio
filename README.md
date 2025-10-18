@@ -1,36 +1,41 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Spidey Portfolio
 
-## Getting Started
+A Next.js portfolio for Spidey with an image gallery that can now be managed entirely through Netlify CMS.
 
-First, run the development server:
+## Development
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The project runs on [http://localhost:3000](http://localhost:3000). Builds automatically optimise uploaded images before running the Next.js build via the `npm run build` script.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Managing images (no-code workflow)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. Deploy the site to Netlify and enable **Netlify Identity** with email invites for editors.
+2. Under Identity → Services, enable **Git Gateway** so the CMS can commit content changes.
+3. Invite your editors. They can open `https://your-site.netlify.app/admin` to log in and manage content.
+4. Inside the CMS they can:
+   - Update the hero image and its alt text.
+   - Add, remove, and reorder polaroids.
+   - Add, remove, and reorder gallery images.
+   - Upload new images – they are stored in `public/uploads/` and optimised automatically during the next build.
+5. Publish the changes. Netlify will run a new build, execute the optimisation script, and deploy the updated gallery.
 
-## Learn More
+## Manual edits (optional)
 
-To learn more about Next.js, take a look at the following resources:
+- Image metadata lives in `src/content/gallery.json`. The UI reads from this file, so changes there instantly update the gallery order and alt text.
+- Original images are stored in `public/uploads/`. The optimisation script outputs responsive `webp` and `avif` files into `public/optimized-images/` that are used at runtime.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Commands
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| Command | Description |
+| ------- | ----------- |
+| `npm run dev` | Start the local development server. |
+| `npm run build` | Optimise images and create a production build. |
 
-## Deploy on Vercel
+## Deployment notes
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- The repository includes `public/admin/index.html` and `config.yml`, which enable Netlify CMS at `/admin`.
+- Ensure that the Netlify build command uses `npm run build` (or `bun run build` if you prefer Bun) so that image optimisation runs before the Next.js build step.
