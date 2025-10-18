@@ -1,15 +1,17 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import Image from 'next/image';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 
-// Add imageDimensions to props
-type ImageDimensions = { width: number; height: number };
+type LightboxImage = {
+  src: string;
+  alt?: string;
+};
+
 interface LightboxProps {
   isOpen: boolean;
   onClose: () => void;
-  images: string[]; // Should be paths to reasonably sized optimized images (e.g., 1200w webp)
+  images: LightboxImage[];
   currentIndex: number;
   // galleryType: string; // Removed if not needed
   // imageDimensions: { [key: string]: ImageDimensions }; // Removed, dimensions are implicit in the optimized image
@@ -63,7 +65,10 @@ export default function Lightbox({
   if (!isOpen || images.length === 0) return null;
 
   // No need to get dimensions here anymore
-  const currentImageSrc = images[index];
+  const currentImage = images[index];
+  const currentImageSrc = currentImage?.src;
+
+  if (!currentImageSrc) return null;
 
   return (
     <div
@@ -118,9 +123,9 @@ export default function Lightbox({
         onClick={(e) => e.stopPropagation()} 
       >
         <img
-          key={currentImageSrc} 
+          key={currentImageSrc}
           src={currentImageSrc}
-          alt={`Image ${index + 1}`}
+          alt={currentImage?.alt ?? `Image ${index + 1}`}
           className="object-contain max-h-[90vh] max-w-[90vw] w-auto h-auto block"
           loading="eager"
         />

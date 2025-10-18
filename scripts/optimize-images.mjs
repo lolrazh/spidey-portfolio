@@ -3,7 +3,7 @@ import { glob } from 'glob';
 import fs from 'fs-extra';
 import path from 'path';
 
-const SOURCE_DIR = path.join(process.cwd(), 'src/assets/images');
+const SOURCE_DIR = path.join(process.cwd(), 'public/uploads');
 const OUTPUT_DIR = path.join(process.cwd(), 'public/optimized-images');
 const SIZES = [640, 750, 828, 1080, 1200, 1920]; // Common device widths
 const FORMATS = ['webp', 'avif'];
@@ -61,4 +61,4 @@ async function optimizeImages() {
   }
 }
 
-optimizeImages(); 
+optimizeImages();
