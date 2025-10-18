@@ -1,0 +1,51 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "src/assets/images"
+public_folder: "src/assets/images"
+media_folder_relative: true
+collections:
+  - name: "content"
+    label: "Site Content"
+    delete: false
+    files:
+      - name: "gallery"
+        label: "Gallery"
+        file: "src/content/gallery.json"
+        description: "Manage the hero, polaroid, and gallery images from one place."
+        fields:
+          - label: "Hero Image"
+            name: "heroImage"
+            widget: "image"
+            choose_url: false
+            allow_multiple: false
+            hint: "Image shown in the hero/about section. Pick one of the uploaded gallery images."
+          - label: "Polaroid Image"
+            name: "polaroidImage"
+            widget: "image"
+            choose_url: false
+            allow_multiple: false
+            hint: "Image opened when the Polaroids button is clicked."
+          - label: "Images"
+            name: "images"
+            label_singular: "Image"
+            widget: "list"
+            summary: "{{file}}"
+            hint: "Upload new images here, set their alt text, and choose whether they appear in the main gallery. Drag to reorder."
+            fields:
+              - label: "File"
+                name: "file"
+                widget: "image"
+                choose_url: false
+              - label: "Alt Text"
+                name: "alt"
+                widget: "string"
+                required: false
+                hint: "Describe the photo for accessibility (used for image alt text)."
+              - label: "Show in Gallery"
+                name: "includeInGallery"
+                widget: "boolean"
+                required: false
+                default: true
+                hint: "Uncheck to hide from the masonry grid (useful for hero/polaroids)."

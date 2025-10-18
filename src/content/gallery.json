@@ -1,0 +1,121 @@
+{
+  "heroImage": "PSP06449.jpg",
+  "polaroidImage": "short_hair_compcard_2.jpg",
+  "images": [
+    {
+      "file": "PSP06449.jpg",
+      "alt": "Spidey leaning against a yellow railing in an architectural setting",
+      "includeInGallery": false
+    },
+    {
+      "file": "short_hair_compcard_2.jpg",
+      "alt": "Polaroid headshot of Spidey wearing a white tank top",
+      "includeInGallery": false
+    },
+    {
+      "file": "DSC06002.jpg",
+      "alt": "",
+      "includeInGallery": true
+    },
+    {
+      "file": "DSC06700.jpg",
+      "alt": "",
+      "includeInGallery": true
+    },
+    {
+      "file": "DSC05908.jpg",
+      "alt": "",
+      "includeInGallery": true
+    },
+    {
+      "file": "DSC05764.jpg",
+      "alt": "",
+      "includeInGallery": true
+    },
+    {
+      "file": "PSP06633.JPG",
+      "alt": "",
+      "includeInGallery": true
+    },
+    {
+      "file": "PSP06518.JPG",
+      "alt": "",
+      "includeInGallery": true
+    },
+    {
+      "file": "PSP06485.jpg",
+      "alt": "",
+      "includeInGallery": true
+    },
+    {
+      "file": "PSP06604.JPG",
+      "alt": "",
+      "includeInGallery": true
+    },
+    {
+      "file": "PSP06609.JPG",
+      "alt": "",
+      "includeInGallery": true
+    },
+    {
+      "file": "PSP06627.JPG",
+      "alt": "",
+      "includeInGallery": true
+    },
+    {
+      "file": "PSP06657.JPG",
+      "alt": "",
+      "includeInGallery": true
+    },
+    {
+      "file": "PSP06562.jpg",
+      "alt": "",
+      "includeInGallery": true
+    },
+    {
+      "file": "PSP06450.jpg",
+      "alt": "",
+      "includeInGallery": true
+    },
+    {
+      "file": "PSP06444.jpg",
+      "alt": "",
+      "includeInGallery": true
+    },
+    {
+      "file": "DSC06971.jpg",
+      "alt": "",
+      "includeInGallery": true
+    },
+    {
+      "file": "IMG_20240601_013652_478.jpg",
+      "alt": "",
+      "includeInGallery": true
+    },
+    {
+      "file": "IMG-20250414-WA0005.jpg",
+      "alt": "",
+      "includeInGallery": true
+    },
+    {
+      "file": "IMG-20250414-WA0006.jpg",
+      "alt": "",
+      "includeInGallery": true
+    },
+    {
+      "file": "IMG-20250414-WA0007.jpg",
+      "alt": "",
+      "includeInGallery": true
+    },
+    {
+      "file": "IMG-20250414-WA0008.jpg",
+      "alt": "",
+      "includeInGallery": true
+    },
+    {
+      "file": "short_hair_compcard.jpg",
+      "alt": "",
+      "includeInGallery": false
+    }
+  ]
+}
