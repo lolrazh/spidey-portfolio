@@ -112,7 +112,8 @@
     },
     {
       "image": "/uploads/img_6202.jpg",
-      "lightboxImage": "/uploads/img_6202.jpg"
+      "lightboxImage": "/uploads/img_6202.jpg",
+      "alt": "Portfolio image 21"
     }
   ]
 }
