@@ -3,7 +3,7 @@ import { glob } from 'glob';
 import fs from 'fs-extra';
 import path from 'path';
 
-const SOURCE_DIR = path.join(process.cwd(), 'src/assets/images');
+const SOURCE_DIR = path.join(process.cwd(), 'public/uploads');
 const OUTPUT_DIR = path.join(process.cwd(), 'public/optimized-images');
 const SIZES = [640, 750, 828, 1080, 1200, 1920]; // Common device widths
 const FORMATS = ['webp', 'avif'];
@@ -29,33 +29,35 @@ async function optimizeImages() {
   console.log(`Found ${imagePaths.length} images to optimize.`);
 
   let optimizedCount = 0;
-  const processPromises = imagePaths.map(async (imgPath) => {
-    const baseName = path.parse(imgPath).name;
-    const image = sharp(imgPath);
-
-    // Generate different sizes and formats
-    const sizePromises = SIZES.flatMap((size) => 
-      FORMATS.map(async (format) => {
-        const outputFileName = `${baseName}-${size}w.${format}`;
-        const outputPath = path.join(OUTPUT_DIR, outputFileName);
-        
-        try {
-          await image
-            .resize(size)
-            .toFormat(format, DEFAULT_QUALITY)
-            .toFile(outputPath);
-          optimizedCount++;
-        } catch (err) {
-          console.error(`Error optimizing ${imgPath} to ${outputPath}:`, err);
-        }
-      })
-    );
-    await Promise.all(sizePromises);
-  });
 
   try {
-    await Promise.all(processPromises);
-    console.log(`Image optimization complete. ${optimizedCount} optimized files created.`);
+    for (const [index, imgPath] of imagePaths.entries()) {
+      const baseName = path.parse(imgPath).name;
+      console.log(`Processing ${baseName} (${index + 1}/${imagePaths.length})`);
+
+      for (const size of SIZES) {
+        for (const format of FORMATS) {
+          const outputFileName = `${baseName}-${size}w.${format}`;
+          const outputPath = path.join(OUTPUT_DIR, outputFileName);
+
+          try {
+            if (await fs.pathExists(outputPath)) {
+              continue;
+            }
+
+            await sharp(imgPath)
+              .resize(size)
+              .toFormat(format, DEFAULT_QUALITY)
+              .toFile(outputPath);
+            optimizedCount++;
+          } catch (err) {
+            console.error(`Error optimizing ${imgPath} to ${outputPath}:`, err);
+          }
+        }
+      }
+    }
+
+    console.log(`Image optimization complete. ${optimizedCount} new optimized files created.`);
   } catch (error) {
     console.error('Error during image processing:', error);
   }
