@@ -21,6 +21,11 @@
       "alt": "Portfolio image 2"
     },
     {
+      "image": "/uploads/dsc05891.jpg",
+      "lightboxImage": "/uploads/dsc05891.jpg",
+      "alt": "Portfolio image 15"
+    },
+    {
       "image": "/uploads/DSC05908.jpg",
       "lightboxImage": "/uploads/DSC05908.jpg",
       "alt": "Portfolio image 3"
@@ -79,11 +84,6 @@
       "image": "/uploads/PSP06444.jpg",
       "lightboxImage": "/uploads/PSP06444.jpg",
       "alt": "Portfolio image 14"
-    },
-    {
-      "image": "/uploads/DSC06971.jpg",
-      "lightboxImage": "/uploads/DSC06971.jpg",
-      "alt": "Portfolio image 15"
     },
     {
       "image": "/uploads/IMG_20240601_013652_478.jpg",
