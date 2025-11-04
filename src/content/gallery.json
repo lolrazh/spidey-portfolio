@@ -26,6 +26,11 @@
       "alt": "Portfolio image 15"
     },
     {
+      "image": "/uploads/PSP06450.jpg",
+      "lightboxImage": "/uploads/PSP06450.jpg",
+      "alt": "Portfolio image 13"
+    },
+    {
       "image": "/uploads/DSC05908.jpg",
       "lightboxImage": "/uploads/DSC05908.jpg",
       "alt": "Portfolio image 3"
@@ -36,9 +41,9 @@
       "alt": "Portfolio image 4"
     },
     {
-      "image": "/uploads/PSP06633.jpg",
-      "lightboxImage": "/uploads/PSP06633.jpg",
-      "alt": "Portfolio image 5"
+      "image": "/uploads/PSP06444.jpg",
+      "lightboxImage": "/uploads/PSP06444.jpg",
+      "alt": "Portfolio image 14"
     },
     {
       "image": "/uploads/PSP06518.jpg",
@@ -76,14 +81,9 @@
       "alt": "Portfolio image 12"
     },
     {
-      "image": "/uploads/PSP06450.jpg",
-      "lightboxImage": "/uploads/PSP06450.jpg",
-      "alt": "Portfolio image 13"
-    },
-    {
-      "image": "/uploads/PSP06444.jpg",
-      "lightboxImage": "/uploads/PSP06444.jpg",
-      "alt": "Portfolio image 14"
+      "image": "/uploads/PSP06633.jpg",
+      "lightboxImage": "/uploads/PSP06633.jpg",
+      "alt": "Portfolio image 5"
     },
     {
       "image": "/uploads/IMG_20240601_013652_478.jpg",
